@@ -8,7 +8,7 @@ import About from './pages/about';
 import Community from './pages/community';
 
 function App() {
-  return (
+  return (  
     <Router>
     <Navbar />
     <Routes>
