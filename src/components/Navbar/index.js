@@ -1,12 +1,12 @@
 import React from "react";
 import { Nav, NavLink, NavMenu } 
     from "./NavbarElements";
-  
+
 
 const Navbar = () => {
     return (
       <>
-        <Nav>
+        <Nav class="navbar navbar-expand-lg navbar-light bg-light">
           <NavMenu>
           <NavLink to="" activeStyle>
               Home
