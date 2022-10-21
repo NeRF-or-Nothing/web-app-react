@@ -10,15 +10,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (  
+    <div className="App">
     <Router>
     <Navigationbar />
     <Switch>
-        <Route exact path='/' element={<Home/>} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/community' element={<Community/>} />
+        <Route exact path='/' component={Home} />
+        <Route path='/about' component={About} />
+        <Route path='/community' component={Community} />
     </Switch>
     </Router>
-
+    </div>
   );
 }
 
