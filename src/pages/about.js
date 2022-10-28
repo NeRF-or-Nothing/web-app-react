@@ -3,9 +3,11 @@ import React from "react";
 const About = () => {
   return (
     <div>
-      <h1>
-        This is the about NerF Pag.
-      </h1>
+      <div class="container">
+      <div class="row align-items-center my-5">
+      <h1 class="font-weight-light">About NerF Technology</h1>
+      </div>
+      </div>
     </div>
   );
 };

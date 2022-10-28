@@ -3,9 +3,18 @@ import React from "react";
 const Community = () => {
   return (
     <div>
-      <h1>
-        This is the Community Page
-      </h1>
+      <div class="container">
+      <div class="row align-items-center my-5">
+      <div class="row align-items-center my-5"> </div>
+      <h1 class="font-weight-light">Welcome to the NerF or Nothing Community</h1>
+      <div class="row align-items-center my-3"></div>
+      <h3 class="font-weight-light">This is a thriving community where individuals can share their cool NerF renders with others in the community.</h3>
+
+          </div>
+          </div>
+
+
+      
     </div>
   );
 };
