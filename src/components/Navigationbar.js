@@ -1,13 +1,10 @@
 import {Nav, Navbar, NavLink} from "react-bootstrap";
 import {Link} from "react-router-dom"
 import React from 'react';
-import logo from "./logo_nerf_fine.svg"; 
 
 const Navigationbar = () => {
     return (
         <Navbar collapseOnSelect expand = "lg" bg = "dark" variant = "dark" >
-
-        <a href="#" class="pull-left"><img src= {logo}/></a> 
 
             <Navbar.Collapse id = "navbarScroll">
             <div class="container">

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch}
 import Home from './pages';
 import About from './pages/about';
 import Community from './pages/community';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     </Switch>
     </Router>
     </div>
+    
   );
 }
 
