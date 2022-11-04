@@ -38,6 +38,71 @@ const About = () => {
     the MongoDB database ready for the Front-end VueJS to access, and displayed
     in the page.
       </h>
+
+      <div class="row align-items-center my-3"></div>
+      <div class="row align-items-center my-3"></div>
+
+      <h3>Back-end Structure and Framwork</h3>
+
+      <h4>
+      NerF Technology via Colmap and Structure for motion and implemented by TencerRF
+      </h4>
+
+      <h>    
+        In a general, NerF is a neural network that generates novel views of complex
+    3D scenes with 2d images and their coordinates. It works by taking input
+    images representing a scene and interpolating between them to render one
+    complete scene. A NeRF uses a sparse set of input views to optimize a
+    continuous volumetric scene function. The result of this optimization is the
+    ability to produce novel views of a complex scene.
+    </h>
+
+    <div class="row align-items-center my-3"></div>
+    <div class="row align-items-center my-3"></div>
+
+    <h3>Webserver Structure and Framwork</h3>
+
+    <h4>
+    Flask with Mongdb and Rabbitmq
+    </h4>
+
+    <h>    
+      There are three components that makes up the web server branch, Flask web
+    server, MongoDB database. First, the Flask web server serves as a connection
+    point that manages messages transmitting between the frontend and the
+    backend, such as when the backend is processing the video in the Structure
+    for motion queue, the flask web server will constantly get information about
+    the time remaining for completion and feet that to the frontend to let the
+    users know the time remaining.
+    </h>
+    <div class="row align-items-center my-3"></div>
+    <h>
+      Second, MongoDB is a asynchronous messenger that hoses the structure for
+    motion queue and NerF queue for backend video processing; it’s used to
+    manage the input video is first send to the SFM queue for processing, and
+    when it’s done, it’s send to the NerF queue for further processing.
+    </h>
+    <div class="row align-items-center my-3"></div>
+    <h>
+      Lastly, the MongoDB database servers as a place to hold the input videos and
+    output fly through videos, as such implementation is easier for the frontend
+    and backend to access the needed resources.
+    </h>
+
+
+    <div class="row align-items-center my-3"></div>
+    <div class="row align-items-center my-3"></div>
+
+    <h3>Front-end Structure and Framwork</h3>
+
+    <h4>
+    React.js & Bootstrap
+    </h4>
+
+    <h>    
+      The app is currently builded with React.js with the Bootstrap plugin. 
+    </h>
+
       </div>
       </div>
     </div>
