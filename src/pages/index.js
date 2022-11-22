@@ -7,6 +7,13 @@ const Home = () => {
     <div>
       <div class="container">
         <div class="row align-items-center my-5">
+          <div>
+          <img
+            src="./logo.png"
+            alt="N logo"
+            style={{ width: 500, height: 300}}
+          />
+          </div>
           <div class="row align-items-center my-5"> </div>
           <h1 class="font-weight-light">NeRF or Nothing</h1>
           <div class="row align-items-center my-3"></div>
