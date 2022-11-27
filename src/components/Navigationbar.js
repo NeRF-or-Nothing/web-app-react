@@ -4,7 +4,18 @@ import React from "react";
 
 const Navigationbar = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      style={{ marginBottom: "10" }}
+    >
+      <img
+        src="./pure_logo.png"
+        alt="N logo"
+        style={{ width: 75, height: 75 }}
+      />
       <Navbar.Collapse id="navbarScroll">
         <div class="container">
           <Nav>
