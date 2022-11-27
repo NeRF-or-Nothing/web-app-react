@@ -32,13 +32,6 @@ const About = () => {
           <div class="row align-items-center my-3"></div>
 
           <div>
-            <img
-              src="./full_project.png"
-              alt="N logo"
-              style={{ width: 800, height: 600 }}
-              padding="30px"
-            />
-
             <h5>
               In the beginning, The user uploads a video to the frontend
               website, that video will then be send to the Web server, more
@@ -60,6 +53,13 @@ const About = () => {
             <div>
               <img
                 src="./example_output.gif"
+                alt="N logo"
+                style={{ width: 800, height: 600 }}
+                padding="30px"
+              />
+
+              <img
+                src="./full_project.png"
                 alt="N logo"
                 style={{ width: 800, height: 600 }}
                 padding="30px"
@@ -86,6 +86,15 @@ const About = () => {
             of this optimization is the ability to produce novel views of a
             complex scene.
           </h5>
+
+          <div>
+            <img
+              src="./colmap.png"
+              alt="N logo"
+              style={{ width: 800, height: 300 }}
+              padding="30px"
+            />
+          </div>
 
           <div class="row align-items-center my-3"></div>
           <div class="row align-items-center my-3"></div>
@@ -119,6 +128,15 @@ const About = () => {
             easier for the frontend and backend to access the needed resources.
           </h5>
 
+          <div>
+            <img
+              src="./mogo.svg"
+              alt="N logo"
+              style={{ width: 400, height: 150 }}
+              padding="30px"
+            />
+          </div>
+
           <div class="row align-items-center my-3"></div>
           <div class="row align-items-center my-3"></div>
 
@@ -130,6 +148,21 @@ const About = () => {
             The app is currently builded with React.js with the Bootstrap
             plugin.
           </h5>
+
+          <div>
+            <img
+              src="./bootstrap.jpg"
+              alt="N logo"
+              style={{ width: 400, height: 180 }}
+              padding="30px"
+            />
+            <img
+              src="./logo192.png"
+              alt="N logo"
+              style={{ width: 180, height: 180 }}
+              padding="30px"
+            />
+          </div>
         </div>
       </div>
     </div>
