@@ -31,22 +31,41 @@ const About = () => {
 
           <div class="row align-items-center my-3"></div>
 
-          <h5>
-            In the beginning, The user uploads a video to the frontend website,
-            that video will then be send to the Web server, more specifically
-            the MongoDB database. Then, the Flask web server will send the input
-            video to RabbitMQ, which is an asynchronies messenger that hosts two
-            of the queue for processing the video. The video will first be send
-            to the structure for motion queue and ready for the structure for
-            motion worker to process the worker to process the video, which will
-            take approximately 10 -15 minutes. Then, the video and the process
-            data will be send out of the SFM queue, and goes into the NerF queue
-            and ready for the NerF worker to process. When the 3d fly through
-            object is created with the NerF worker, the 3D fly through object
-            will be send out of the RabbitMQ, and back to Web server, sorted in
-            the MongoDB database ready for the Front-end VueJS to access, and
-            displayed in the page.
-          </h5>
+          <div>
+            <img
+              src="./full_project.png"
+              alt="N logo"
+              style={{ width: 800, height: 600 }}
+              padding="30px"
+            />
+
+            <h5>
+              In the beginning, The user uploads a video to the frontend
+              website, that video will then be send to the Web server, more
+              specifically the MongoDB database. Then, the Flask web server will
+              send the input video to RabbitMQ, which is an asynchronies
+              messenger that hosts two of the queue for processing the video.
+              The video will first be send to the structure for motion queue and
+              ready for the structure for motion worker to process the worker to
+              process the video, which will take approximately 10 -15 minutes.
+              Then, the video and the process data will be send out of the SFM
+              queue, and goes into the NerF queue and ready for the NerF worker
+              to process. When the 3d fly through object is created with the
+              NerF worker, the 3D fly through object will be send out of the
+              RabbitMQ, and back to Web server, sorted in the MongoDB database
+              ready for the Front-end VueJS to access, and displayed in the
+              page.
+            </h5>
+
+            <div>
+              <img
+                src="./example_output.gif"
+                alt="N logo"
+                style={{ width: 800, height: 600 }}
+                padding="30px"
+              />
+            </div>
+          </div>
 
           <div class="row align-items-center my-3"></div>
           <div class="row align-items-center my-3"></div>
