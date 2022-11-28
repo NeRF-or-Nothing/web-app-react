@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 
 const Community = () => {
   return (
@@ -21,6 +22,45 @@ const Community = () => {
             This is a thriving community where individuals can share their cool
             NerF renders with others in the community.
           </h3>
+        </div>
+
+        <div class="wrapper">
+          <img
+            src="./demo1.jpg"
+            alt="N logo"
+            style={{ width: 500, height: 300 }}
+            hspace="50"
+            vspace="60"
+          />
+
+          <p>User 1</p>
+
+          <img
+            src="./demo2.jpg"
+            alt="N logo"
+            style={{ width: 500, height: 300 }}
+            hspace="50"
+            vspace="60"
+          />
+          <p>User 2</p>
+
+          <img
+            src="./demo3.jpg"
+            alt="N logo"
+            style={{ width: 500, height: 300 }}
+            hspace="50"
+            vspace="60"
+          />
+          <p>User 3</p>
+
+          <img
+            src="./demo4.jpg"
+            alt="N logo"
+            style={{ width: 500, height: 300 }}
+            hspace="50"
+            vspace="60"
+          />
+          <p>User 4</p>
         </div>
       </div>
     </div>
