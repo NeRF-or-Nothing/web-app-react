@@ -2,6 +2,10 @@ import React from "react";
 import button from "react-bootstrap/Button";
 import { input } from "react-bootstrap";
 
+// this page includes the content of the landing page, which includes a logo of the project, a selector
+// that selects a file from the user's local repository, and a button that currently don't have any actions
+// prorams, but it's used to submitt the user input to the backend.
+
 const Home = () => {
   return (
     <div>

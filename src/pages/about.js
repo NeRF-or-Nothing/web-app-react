@@ -1,5 +1,8 @@
 import React from "react";
 
+
+// This is the about page that described all the information for the project, informing the user of what the project is. 
+
 const About = () => {
   return (
     <div>

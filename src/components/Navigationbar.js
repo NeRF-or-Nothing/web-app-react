@@ -2,6 +2,9 @@ import { Nav, Navbar, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import React from "react";
 
+// The is a Bavigation from Bootstrap, nad it's used for users to navigate the three different pages that
+// the website have. 
+
 const Navigationbar = () => {
   return (
     <Navbar

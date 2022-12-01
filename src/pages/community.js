@@ -1,6 +1,9 @@
 import React from "react";
 import "./style.css";
 
+// This is the community page that is designed to host some of the best user inputs and displayed on the page,
+// where other users and visitors can have a look and commont on other people's rendered objects. 
+
 const Community = () => {
   return (
     <div>
