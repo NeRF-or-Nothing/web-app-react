@@ -2,7 +2,7 @@
 
 ![My Remote Image](https://github.com/NeRF-or-Nothing/web-app-react/blob/main/design_n_mock_ups/logo.png?raw=true)
 
-# High Level overview of the content of this repo:
+# High Level overview of the contribution for F22:
 For the Fall-Winter 2022 Semester, We decided to redo the front end in React instead of Vue, in order to make it more beginner frandly. Some of the important mile stopes I did this semester is that I made a comprehansive deisgn of the website, and how the website should look like. Also I made all the pages and routed them properly. Besides that, I utilized bootstrap to make a navigation bar component to let users go to different pages of the website.
 
 # Getting Started with Create React App
