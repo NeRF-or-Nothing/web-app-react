@@ -1,6 +1,6 @@
 # This is the Project Logo
 
-https://github.com/NeRF-or-Nothing/web-app-react/blob/main/design_n_mock_ups/logo.png?raw=true
+![My Remote Image](https://github.com/NeRF-or-Nothing/web-app-react/blob/main/design_n_mock_ups/logo.png?raw=true)
 
 # Getting Started with Create React App
 
