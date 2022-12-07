@@ -9,6 +9,9 @@ import Community from './pages/community';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// this is where the routing are implemented, each of the route goes to the three different pages:
+// It goes to the Home landing page, the about page, or the community page. 
+
 function App() {
   return (  
     <div className="App">
