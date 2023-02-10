@@ -1,12 +1,12 @@
 import React from "react";
-import logo from "../logo.png";
+// import logo from "../logo.png";
 export default function Home(){
     return(
         <div>
             <div className="topBox">
                 <h3 className="nerfText">NeRF or Nothing</h3>
                 <div className="topNerfPic">
-                    <img className="nerfLogo" src={logo}/>
+                    {/* <img className="nerfLogo" src={logo}/> */}
                 </div>
                 <h2 className="generationText">The next generation object rendering technology
                     utilizing the Neural Radiance Field technology.
