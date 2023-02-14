@@ -9,7 +9,7 @@ import {BrowserRouter,Route,Routes} from "react-router-dom";
 
 function App(){
   return(
-    //<NavBar/> for testing purposes, Tashi
+    //<NavBar/> //for testing purposes, Tashi
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home/>}></Route>
