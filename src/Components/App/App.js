@@ -4,10 +4,12 @@ import Home from "../Home/Home";
 import Loading from "../Loading/Loading";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
+import NavBar from "../NavbarLink/NavbarLink";
 import {BrowserRouter,Route,Routes} from "react-router-dom";
 
 function App(){
   return(
+    //<NavBar/> //for testing purposes, Tashi
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home/>}></Route>

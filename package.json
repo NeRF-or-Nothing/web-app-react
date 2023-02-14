@@ -6,9 +6,13 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< HEAD
     "mdb-react-ui-kit": "^5.1.0",
+=======
+    "bootstrap": "^5.2.3",
+>>>>>>> 7ffca30cf37384adfd66bb4643749826637b4e92
     "react": "^18.2.0",
-    "react-bootstrap": "^2.7.1",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.8",
     "react-router-dom": "^6.8.1",
