@@ -11,18 +11,18 @@ import Footer from "../Footer/Footer"
 function App(){
   return(
     //<NavBar/> //for testing purposes, Tashi
-    <Footer/> //for testing purposes, 
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route exact path="/" element={<Home/>}></Route>
-    //     <Route exact path="/Community" element={<Community/>}/>
-    //     <Route exact path="/Home" element={<Home/>}/>
-    //     <Route exact path="/Loading" element={<Loading/>}/>
-    //     <Route exact path="/Signup" element={<Signup/>}/>
-    //     <Route exact path="/Login" element={<Login/>}/>
-    //     <Route exact path="/FullRendered" element={<FullRendered/>}/>
-    //   </Routes>
-    // </BrowserRouter>
+    //<Footer/> //for testing purposes, 
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Home/>}></Route>
+        <Route exact path="/Community" element={<Community/>}/>
+        <Route exact path="/Home" element={<Home/>}/>
+        <Route exact path="/Loading" element={<Loading/>}/>
+        <Route exact path="/Signup" element={<Signup/>}/>
+        <Route exact path="/Login" element={<Login/>}/>
+        <Route exact path="/FullRendered" element={<FullRendered/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
