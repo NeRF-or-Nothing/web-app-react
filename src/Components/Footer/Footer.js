@@ -2,8 +2,6 @@ import React from "react";
 import {
   MDBFooter,
   MDBContainer,
-  MDBIcon,
-  MDBInput,
   MDBCol,
   MDBRow,
   MDBBtn,
@@ -23,7 +21,7 @@ export default function App() {
             href="#!"
             role="button"
           >
-            <img src={logo} alt="nerf-logo" width="40" height="40" />
+            <img src={logo} alt="nerf-logo" max-width="15%"/>
           </MDBBtn>
 
           <a
