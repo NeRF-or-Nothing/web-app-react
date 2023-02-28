@@ -10,17 +10,48 @@ function Signup() {
         <img className="nerfLogo" src={logo}/>
       </div>
       <div class="main">
+
         <p class="sign">
-          <div>Create a new account</div> 
-          <div class="login-div"><span class="AAccount"> Already have an account? <a href="./login">Sign Up</a> </span> </div>
+          <div >Create a new account</div> 
+          <div class="login-div"><span class="noAccount"> Already have an account? <a href="./Login">Log in</a></span> </div>
         </p>
-          <form class="form1">
-            <input class="Name " type="text" align="center" placeholder="Name"/>
-            <input class="un " type="text" align="center" placeholder="Username"/>
-            <input class="email " type="text" align="center" placeholder="Email"/>
-            <input class="pass" type="password" align="center" placeholder="Password"/>
-            <a class="submit" align="center">Sign in</a>  
-          </form>
+
+        <div class="input-block" align="center">
+          <input type="text" name="input-text" id="input-text" required spellcheck="false"/>
+          <span class="placeholder">
+            Name
+          </span>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="input-block" align="center">
+          <input type="text" name="input-text" id="input-text" required spellcheck="false"/>
+          <span class="placeholder">
+            Username
+          </span>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="input-block" align="center">
+          <input type="text" name="input-text" id="input-text" required spellcheck="false"/>
+          <span class="placeholder">
+            Email
+          </span>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="input-block" align="center">
+          <input type="password" name="input-text" id="input-text" required spellcheck="false"/>
+          <span class="placeholder">
+            Password
+          </span>
+        </div>
+        
+        <div class="space"></div>
+        <a class="submit" href="/">Sign in</a>
       </div>
     </body>
   );
