@@ -3,7 +3,7 @@ import "./EachPost.css";
 
 export default function EachPost(){
     return(
-        <div>
+        <div className="eachBox">
             <hr/>
             <div className="picNameUsername">
                 <div className="imageSide">

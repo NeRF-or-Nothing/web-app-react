@@ -1,9 +1,14 @@
 import React from "react";
 import "./Community.css";
+import NavBar from "../NavbarLink/NavbarLink";
+import EachPost from "../EachPost/EachPost";
 export default function Community(){
     return(
+        <div>
+            <NavBar/>
         <div className="mainDiv">
-            <div className="topPost">
+            <EachPost/>
+            {/* <div className="topPost">
                 <div className="topRow">
                     <img src="https://pbs.twimg.com/media/EgdP6MfWAAAH0gu.jpg" className="yourProfilePic"/>
                     <div className="largeBorderBox">
@@ -18,7 +23,8 @@ export default function Community(){
                         <h2>Video</h2>
                     </div>
                 </div>
-            </div>
+            </div> */}
+        </div>
         </div>
     )
 }

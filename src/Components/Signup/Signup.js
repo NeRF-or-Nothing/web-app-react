@@ -11,7 +11,7 @@ function Signup() {
       </div>
       <div class="main">
         <p class="sign">
-          <div>Create a new account</div> 
+          <div>Create a New Account</div> 
           <div class="login-div"><span class="AAccount"> Already have an account? <a href="./login">Sign Up</a> </span> </div>
         </p>
           <form class="form1">

@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import "./FullRendered.css"
+import "./FullRendered.css";
+import NavBar from "../NavbarLink/NavbarLink";
 // import 
 // import ReactBootstrapCarousel from "react-bootstrap-carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,6 +18,8 @@ export default function FullRendered(){
     console.log(`Clicked at (${x}, ${y})`);
   };
   return (
+    <div>
+    <NavBar/>
     <Carousel activeIndex={index} onSelect={handleSelect} data-bs-interval="false" className="carousel">
       <Carousel.Item>
         <img
@@ -54,5 +57,6 @@ export default function FullRendered(){
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
+    </div>
   );
 }

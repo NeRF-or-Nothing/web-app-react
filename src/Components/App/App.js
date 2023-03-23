@@ -4,25 +4,28 @@ import Home from "../Home/Home";
 import Loading from "../Loading/Loading";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
+import About from "../About/About";
 import NavBar from "../NavbarLink/NavbarLink";
 import {BrowserRouter,Route,Routes} from "react-router-dom";
 import Footer from "../Footer/Footer"
 
 function App(){
   return(
-    //<NavBar/> //for testing purposes, Tashi
-    <Footer/> //for testing purposes, 
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route exact path="/" element={<Home/>}></Route>
-    //     <Route exact path="/Community" element={<Community/>}/>
-    //     <Route exact path="/Home" element={<Home/>}/>
-    //     <Route exact path="/Loading" element={<Loading/>}/>
-    //     <Route exact path="/Signup" element={<Signup/>}/>
-    //     <Route exact path="/Login" element={<Login/>}/>
-    //     <Route exact path="/FullRendered" element={<FullRendered/>}/>
-    //   </Routes>
-    // </BrowserRouter>
+    <div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Home/>}></Route>
+        <Route exact path="/Community" element={<Community/>}/>
+        <Route exact path="/Home" element={<Home/>}/>
+        <Route exact path="/Loading" element={<Loading/>}/>
+        <Route exact path="/Signup" element={<Signup/>}/>
+        <Route exact path="/Login" element={<Login/>}/>
+        <Route exact path="/About" element={<About/>}/>
+        <Route exact path="/FullRendered" element={<FullRendered/>}/>
+      </Routes>
+    </BrowserRouter>
+    </div>
+    
   )
 }
 

@@ -1,0 +1,10 @@
+.eachBox{
+    width:70vw;
+    margin:auto;
+    border-style: solid;
+}
+.eachPfp{
+    border-radius: 50%;
+    width:5vw;
+    height:5vh;
+}

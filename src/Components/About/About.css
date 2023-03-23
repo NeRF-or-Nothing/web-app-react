@@ -1,0 +1,42 @@
+h1{
+    font-size: calc(3.375rem + 1.5vw);
+}
+.TdRenderImg{
+    width:110%;
+    height:110%;
+}
+.barOne{
+    width: 20vw;
+}
+.technologyCircleLine{
+    float: left;
+}
+.blueCircle{
+    height:119px;
+    width:123px;
+    background-color: #00A8E8;
+}
+/* .carouselPics{
+    width: 40%;
+    height: 40%;
+} */
+.barTwo{
+    /* margin-top: %; */
+}
+.leftSideText{
+    text-align: center;
+    font-size: 40px;
+    margin-top: 30%;
+}
+img #flask{
+    width:85px;
+    height:110px;
+}
+img #mongo{
+    width:185px;
+    height:122px;
+}
+img #rabbit{
+    width:578px;
+    height:386px;
+}
