@@ -4,6 +4,7 @@ import explainDiagram from "./Full_Project.png";
 import colmapPic from "./colmap.png";
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
+import NavBar from "../NavbarLink/NavbarLink";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./About.css"
@@ -16,11 +17,12 @@ export default function About() {
   };
   return (
     <div>
+      <NavBar/>
       <section className="jumbotron text-center">
         <div className="container">
           <div className="flex-container">
             <div className="flex-child left">
-              <h1 className="jumbotron-heading">"3D rendering <br />your videos."</h1>
+              <h1 className="jumbotron-heading">"3D rendering <br />your videos made <div className="easy">easy.</div>"</h1>
             </div>
             <div className="flex-child right">
               <img src="https://www.kindpng.com/picc/m/238-2380430_3d-rendering-services-logo-render-png-3d-transparent.png" />
@@ -30,14 +32,14 @@ export default function About() {
           <div className="flex-container">
           <div className="flex-child left">
           <div className="techText"><h2><span class="dot blueDot"></span>Our Technology</h2></div>
-          <p class="lead text-muted">NeRF consists of a website that
+          <p class="lead text-muted"><h2>NeRF consists of a website that
             receives video input from the
             user and creates a 3D fly through
             Of the object using TensorFlow
             and Colmap. This data is passed
             to our Flask server to connect
             All of our data and form a set of
-            HTTP requests.   </p>
+            HTTP requests.  </h2> </p>
           </div>
           <div className="flex-child right">
             <img src={exampleGif}/>
@@ -100,6 +102,45 @@ be displayed on the page </h2>
         </div>
         </div>
         <img src={explainDiagram}/>
+
+        <div>
+      <div className="techText"><h2><span class="dot orangeDot"></span>Back-End Structure and Framework</h2></div>
+        <div className="miniPoints">
+          <h2><span class="dot orangeDot"></span>NerF is a neural network that generates 
+novel views of complex 3D scenes with 2d 
+images and their coordinates</h2>
+          <h2><span class="dot orangeDot"></span>We take input images representing a 
+scene and interpolating between them 
+to render one complete scene</h2>
+          <h2><span class="dot orangeDot"></span>NeRF uses a sparse set of input views to 
+optimize a continuous volumetric scene 
+function</h2>
+          <h2><span class="dot orangeDot"></span>The result of this optimization is the ability
+ to produce novel views of a complex 
+scene. </h2>
+        </div>
+        </div>
+        <img src={colmapPic}/>
+
+        <div>
+      <div className="techText"><h2><span class="dot pinkDot"></span>Webserver Structure and Framework</h2></div>
+        
+        <div className="miniPoints">
+          <h2><span class="dot pinkDot"></span>Flask web server serves as a connection 
+point that manages messages transmitting 
+between the frontend and the backend</h2>
+          <h2><span class="dot pinkDot"></span>MongoDB is a asynchronous messenger 
+that hoses the structure for motion queue 
+and NerF queue for backend video 
+processing.</h2>
+          <h2><span class="dot pinkDot"></span>MongoDB database servers as a place to 
+hold the input videos and output fly through 
+videos, as such implementation is easier for 
+the frontend and backend to access the 
+needed resources.</h2>
+        </div>
+        </div>
+
     </div>
   )
 

@@ -12,6 +12,7 @@ export default function FullRendered(){
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+  //
   const handleClick = (event) => {
     const x = event.clientX;
     const y = event.clientY;

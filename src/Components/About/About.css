@@ -61,10 +61,22 @@ img #rabbit{
   
   .jumbotron-heading {
     font-weight: 600;
-    font-size: 70px;
+    font-size: 50px;
 
   }
-  
+.carousel {
+  width:500px;
+  height:300px;
+  margin: auto;
+}
+h2{
+  margin-top: 30px;
+  color:black;
+  font-weight: 600;
+}
+.easy{
+  color:#00A8E8;
+}
   .jumbotron .container {
     max-width: 40rem;
   }
@@ -73,6 +85,7 @@ img #rabbit{
 }
 .techText{
   margin-top: 10vh;
+  text-align: center;
 }
 .flex-child {
     flex: 1;
@@ -116,4 +129,10 @@ img #rabbit{
 .miniPoints{
   margin:auto;
   width:50vw;
+}
+.orangeDot{
+  background-color: orange;
+}
+.pinkDot{
+  background-color: #FF9B9B;
 }
