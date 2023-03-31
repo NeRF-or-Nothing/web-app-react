@@ -9,7 +9,8 @@ function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand><Link to="../Home"><img src={logo} id="navLogo"/></Link></Navbar.Brand>
+      <Navbar.Brand><Link to="../Home">NeRF</Link></Navbar.Brand>
+        {/* <Navbar.Brand><Link to="../Home"><img src={logo} id="navLogo"/></Link></Navbar.Brand> */}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

@@ -5,9 +5,7 @@ import Loading from "../Loading/Loading";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import About from "../About/About";
-import NavBar from "../NavbarLink/NavbarLink";
 import {BrowserRouter,Route,Routes} from "react-router-dom";
-import Footer from "../Footer/Footer"
 
 function App(){
   return(

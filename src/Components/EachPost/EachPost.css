@@ -8,3 +8,13 @@
     width:5vw;
     height:5vh;
 }
+.card{
+    margin:auto;
+    margin-top: 30px;
+}
+div{
+    margin:auto;
+}
+.card-header{
+    width:100%;
+}
