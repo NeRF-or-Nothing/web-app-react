@@ -1,22 +1,25 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "../../../src/pure_logo.png";
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import logo from "./pure_logo.png";
+import {Link} from "react-router-dom";
 
 function NavBar() {
   return (
-    <Navbar bg="dark" expand="lg">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <img src={logo} className="d-inline-block align-top" alt="nerflogo" width="50" height="50"/>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+      <Navbar.Brand><Link to="../Home">NeRF</Link></Navbar.Brand>
+        {/* <Navbar.Brand><Link to="../Home"><img src={logo} id="navLogo"/></Link></Navbar.Brand> */}
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className = "text-white" href="#home">About</Nav.Link>
-            <Nav.Link className = "text-white" href="#link" >Community</Nav.Link>
-            <Nav.Link className = "text-white" href="#login">Login</Nav.Link>
-            <Nav.Link type = "button" className="btn btn-warning m3-margin" href="#signup">Signup</Nav.Link>
+            <Nav.Link><Link to="../About">About</Link></Nav.Link>
+            <Nav.Link><Link to="../Community">Community</Link></Nav.Link>
+          </Nav>
+          <Nav>
+            <Button variant="btn btn-success" style={{marginRight:"10px",color:"white"}}><Link to="../Signup">Signup</Link></Button>
+            <Button variant="btn btn-warning"><Link to="../Login">Login</Link></Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
