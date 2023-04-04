@@ -1,43 +1,3 @@
-/* h1{
-    font-size: calc(3.375rem + 1.5vw);
-}
-.TdRenderImg{
-    width:110%;
-    height:110%;
-}
-.barOne{
-    width: 20vw;
-}
-.technologyCircleLine{
-    float: left;
-}
-.blueCircle{
-    height:119px;
-    width:123px;
-    background-color: #00A8E8;
-}
-
-.barTwo{
-
-}
-.leftSideText{
-    text-align: center;
-    font-size: 40px;
-    margin-top: 30%;
-}
-img #flask{
-    width:85px;
-    height:110px;
-}
-img #mongo{
-    width:185px;
-    height:122px;
-}
-img #rabbit{
-    width:578px;
-    height:386px;
-} */
-
 :root {
     --jumbotron-padding-y: 3rem;
   }
@@ -46,7 +6,7 @@ img #rabbit{
     padding-top: var(--jumbotron-padding-y);
     padding-bottom: var(--jumbotron-padding-y);
     margin-bottom: 0;
-    background-color: #fff;
+    background-color: black;
   }
   @media (min-width: 768px) {
     .jumbotron {
@@ -60,25 +20,39 @@ img #rabbit{
   }
   
   .jumbotron-heading {
-    font-weight: 600;
-    font-size: 50px;
+    font-weight: bold;
+    font-size: 60px;
+    color:white;
 
   }
 .carousel {
-  width:500px;
-  height:300px;
+  width:100%;
+  max-height:70%;
   margin: auto;
+  background-color: #F8333C;
+}
+.carousel img{
+  width:500px;
+  height:100%;
+  margin: auto;
+  background-color: #F8333C;
 }
 h2{
   margin-top: 30px;
   color:black;
   font-weight: 600;
 }
+h3{
+  margin-top: 30px;
+  color:white;
+  font-weight: 600;
+}
 .easy{
   color:#00A8E8;
 }
+
   .jumbotron .container {
-    max-width: 40rem;
+    max-width: 67rem;
   }
   .flex-container {
     display: flex;
@@ -115,7 +89,7 @@ h2{
   background-color: #00A8E8;
   }
   .aquaDot{
-    background-color: #00FFFF;
+    background-color: #44AF69;
   }
   .techText{
     width:40vw;
@@ -131,8 +105,11 @@ h2{
   width:50vw;
 }
 .orangeDot{
-  background-color: orange;
+  background-color: #F8333C;
 }
 .pinkDot{
-  background-color: #FF9B9B;
+  background-color: #2B9EB3;
+}
+.beigeDiv{
+  background-color: #FFF8D7;
 }
