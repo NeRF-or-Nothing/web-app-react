@@ -26,16 +26,18 @@
 
   }
 .carousel {
-  width:100%;
-  max-height:70%;
+  width:40%;
+  height:20%;
   margin: auto;
-  background-color: #F8333C;
 }
 .carousel img{
-  width:500px;
-  height:100%;
+  margin-top: 100px;
+  height:300px;
   margin: auto;
-  background-color: #F8333C;
+  background-color: red;
+}
+.carouselCard{
+  background-color: red;
 }
 h2{
   margin-top: 30px;
@@ -112,4 +114,5 @@ h3{
 }
 .beigeDiv{
   background-color: #FFF8D7;
+  /* margin-top: -11.5%; */
 }

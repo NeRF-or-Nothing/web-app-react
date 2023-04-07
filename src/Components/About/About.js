@@ -48,7 +48,7 @@ export default function About() {
             </div>
         </div>
       </section>
-
+      <div className="carouselCard">
       <Carousel>
         <Carousel.Item>
           <img
@@ -90,6 +90,7 @@ export default function About() {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+      </div>
       <div className="beigeDiv">
       <div>
       <div className="techText"><h2><span class="dot aquaDot"></span>&nbsp;&nbsp;How Does It Work?</h2></div>
