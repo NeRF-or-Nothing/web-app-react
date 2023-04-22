@@ -1,0 +1,50 @@
+.topBox{
+    width:70vw;
+    margin:auto;
+}
+.nerfLogo{
+    width:20vw;
+    height:10vh;
+}
+img{
+    margin: auto;
+    display: block;
+}
+.nerfText{
+    font-size: 60px;
+    text-align: center;
+}
+.generationText{
+    font-size: 40px;
+}
+.yellowDiv{
+    background-color: #FBDE00;
+    height:35vh;
+}
+.innerDiv > div{
+    width:70%;
+    margin:auto;
+}
+.lkjDVC {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-width: 322px;
+    max-width: 508px;
+    height: 48px;
+    border: dashed 2px #0658c2;
+    padding: 8px 16px 8px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    margin: auto;
+}
