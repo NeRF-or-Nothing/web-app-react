@@ -3,7 +3,7 @@
     margin:auto;
 }
 .nerfLogo{
-    width:20vw;
+    width:30vw;
     height:10vh;
 }
 img{
@@ -19,10 +19,10 @@ img{
 }
 .yellowDiv{
     background-color: #FBDE00;
-    height:35vh;
+    height:40vh;
 }
 .innerDiv > div{
-    width:70%;
+    width:100%;
     margin:auto;
 }
 .lkjDVC {
