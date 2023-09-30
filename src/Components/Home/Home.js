@@ -9,7 +9,7 @@ export default function Home(){
     const [file, setFile] = useState(null);
     const handleChange = (file) => {
         setFile(file);
-      };
+    };
     return(
         <div>
 
