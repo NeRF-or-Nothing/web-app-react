@@ -49,7 +49,7 @@ export default function About() {
         </div>
       </section>
 
-      <Carousel>
+      <Carousel style={{backgroundColor:"white"}}>
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -72,7 +72,7 @@ export default function About() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://ww1.freelogovectors.net/wp-content/uploads/2018/07/tensorflow-logo.png?lossy=1&ssl=1"
+            src="https://ww2.freelogovectors.net/wp-content/uploads/2018/07/tensorflow-logo.png?lossy=1&w=2560&ssl=1"
             alt="Third slide"
           />
 

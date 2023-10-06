@@ -20,8 +20,6 @@ export default function Home(){
 
                 {/* start of topBox div */}
                 <div className="topBox">
-                    <h3 className="nerfText">NeRF or Nothing</h3>
-
                     {/* start of topNerfPic div */}
                     <div className="topNerfPic">
                         <img className="nerfLogo" src={logo}/>
@@ -32,8 +30,8 @@ export default function Home(){
                     </h2>
                 </div>
 
-                {/* start of yellowDiv */}
-                <div className="yellowDiv">
+                {/* start of Div */}
+                <div className="greenDiv">
 
                     {/* start of innerDiv */}
                     <div className="innerDiv" style={{textAlign:"center"}}>
