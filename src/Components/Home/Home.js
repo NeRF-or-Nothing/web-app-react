@@ -2,13 +2,31 @@ import React,{useState} from "react";
 import { FileUploader } from "react-drag-drop-files";
 import NavBar from "../NavbarLink/NavbarLink";
 import Footer from "../Footer/Footer";
+import Axios from "axios";
 import "./Home.css";
 import logo from "./logo.png";
+
 const fileTypes = ["MP4"];
 export default function Home(){
     const [file, setFile] = useState(null);
     const handleChange = (file) => {
         setFile(file);
+    };
+    const uploadFile = () => {
+        const formData = new FormData();
+        formData.append("file",file[0]);
+
+        Axios.post("http://127.0.0.1:5000/video", formData,{
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }).then((response) => {
+            // Handle the response from the Flask backend
+            console.log("Video upload response:", response.data);
+          }).catch((error) => {
+            // Handle errors
+            console.error("Error uploading video:", error);
+          });
     };
     return(
         <div>
@@ -25,8 +43,7 @@ export default function Home(){
                         <img className="nerfLogo" src={logo}/>
                     </div>
 
-                    <h2 className="generationText" style={{paddingBottom:"4vh"}}>The next generation object rendering technology
-                        utilizing the Neural Radiance Field technology.
+                    <h2 className="generationText" style={{paddingBottom:"4vh"}}>The next generation object rendering technology utilizing the Neural Radiance Field technology.
                     </h2>
                 </div>
 
@@ -47,6 +64,7 @@ export default function Home(){
                             types={fileTypes}
                             style={{margin:"auto"}}
                         />
+                        <button onClick={uploadFile}>Upload Video</button>
                         <p>{file ? `File name: ${file[0].name}` : "no files uploaded yet"}</p>
                     </div>
 

@@ -23,11 +23,14 @@ img{
 
 .greenDiv{
     background-color: #0f9015;
-    height:40vh;
+    height: 50vh;
 }
 .innerDiv > div{
     width:100%;
     margin:auto;
+}
+.innerDiv h2 {
+    padding-bottom: 10px;
 }
 .lkjDVC {
     position: relative;
