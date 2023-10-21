@@ -10,24 +10,26 @@ const fileTypes = ["MP4"];
 export default function Home(){
     const [file, setFile] = useState(null);
     const handleChange = (file) => {
+        console.log("file", file);
         setFile(file);
     };
     const uploadFile = () => {
-        const formData = new FormData();
-        formData.append("file",file[0]);
-
-        Axios.post("http://127.0.0.1:5000/video", formData,{
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        }).then((response) => {
-            // Handle the response from the Flask backend
-            console.log("Video upload response:", response.data);
-          }).catch((error) => {
-            // Handle errors
-            console.error("Error uploading video:", error);
-          });
-    };
+        if (file && file[0].type !== '' && file[0].type !== 'unknown') {
+          const formData = new FormData();
+          formData.append('file', file[0]);
+          fetch('http://127.0.0.1:5000/video', {
+                method: 'POST',
+                cache: 'no-cache',
+                body: formData,
+            }).then((response) => response.text()).then((text) => {
+                console.log(text);
+        }).catch((error) => {
+          console.error(error);
+        });
+    } else {
+      console.log('File type unknown.');
+    }
+      };
     return(
         <div>
 
