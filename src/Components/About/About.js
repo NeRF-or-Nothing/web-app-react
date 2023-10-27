@@ -72,7 +72,7 @@ export default function About() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://ww1.freelogovectors.net/wp-content/uploads/2018/07/tensorflow-logo.png?lossy=1&ssl=1"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/TensorFlow_logo.svg/768px-TensorFlow_logo.svg.png"
             alt="Third slide"
           />
 
@@ -103,7 +103,7 @@ video and creates a 3D fly object to then
 be displayed on the page </h2>
         </div>
         </div>
-        <img src={explainDiagram}/>
+        <img className="explainDiagram" src={explainDiagram}/>
 
         <div>
       <div className="techText"><h2><span class="dot orangeDot"></span>&nbsp;&nbsp;Back-End Structure and Framework</h2></div>
