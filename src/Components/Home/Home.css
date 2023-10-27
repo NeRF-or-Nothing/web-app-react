@@ -3,8 +3,8 @@
     margin:auto;
 }
 .nerfLogo{
-    width:20vw;
-    height:10vh;
+    width:10vw;
+    height:auto;
 }
 img{
     margin: auto;
@@ -16,14 +16,21 @@ img{
 }
 .generationText{
     font-size: 40px;
+    color: black;
+    padding-bottom:"4vh";
 }
-.yellowDiv{
-    background-color: #FBDE00;
-    height:35vh;
+
+
+.greenDiv{
+    background-color: #0f9015;
+    height: 50vh;
 }
 .innerDiv > div{
-    width:70%;
+    width:100%;
     margin:auto;
+}
+.innerDiv h2 {
+    padding-bottom: 10px;
 }
 .lkjDVC {
     position: relative;

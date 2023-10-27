@@ -11,27 +11,26 @@ import {
 import logo from "../../../src/github-mark.png";
 
 export default function Footer() {
+  const openGitHub = (url) =>{
+    window.open(url, "_blank", "noreferrer");
+  };
   return (
-    <MDBFooter className="text-center" color="white" bgColor="dark">
-      <MDBContainer className="p-4">
-        <section className="mb-4">
-          <MDBBtn
-            outline
-            color="light"
-            floating
-            className="m-1"
-            href="#!"
-            role="button"
-          >
-            <img src={"https://cdn-icons-png.flaticon.com/512/25/25231.png"} alt="nerf-logo" width="40" height="40" />
-          </MDBBtn>
 
-          <a
+    <MDBFooter className="text-center" color="white" style={{ backgroundColor: "#d9d9d9" }}>
+
+      <MDBContainer className="p-4">
+
+        <section className="mb-4">
+
+
+          <img className = "gitImage" onClick = {() => openGitHub("https://github.com/NeRF-or-Nothing/web-app-react")} src={"https://cdn-icons-png.flaticon.com/512/25/25231.png"} />
+
+          {/* <a
             href="https://github.com/NeRF-or-Nothing/web-app-react"
             className="link-dark m-3"
           >
             <p className="text-light">View our Github</p>
-          </a>
+          </a> */}
         </section>
       </MDBContainer>
 

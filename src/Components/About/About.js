@@ -18,7 +18,7 @@ export default function About() {
   };
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <section className="jumbotron text-center">
         <div className="container">
           <div className="flex-container firstBox">
@@ -31,25 +31,25 @@ export default function About() {
 
           </div>
           <div className="flex-container">
-          <div className="flex-child left">
-          <div className="techText"><h3><span class="dot blueDot"></span>&nbsp;&nbsp;Our Technology</h3></div>
-          <p class="lead text-muted"><h3>NeRF consists of a website that
-            receives video input from the
-            user and creates a 3D fly through
-            Of the object using TensorFlow
-            and Colmap. This data is passed
-            to our Flask server to connect
-            All of our data and form a set of
-            HTTP requests.  </h3> </p>
-          </div>
-          <div className="flex-child right">
-            <img src={exampleGif}/>
-          </div>
+            <div className="flex-child left">
+              <div className="techText"><h3><span class="dot blueDot"></span>&nbsp;&nbsp;Our Technology</h3></div>
+              <p class="lead text-muted"><h3>NeRF consists of a website that
+                receives video input from the
+                user and creates a 3D fly through
+                Of the object using TensorFlow
+                and Colmap. This data is passed
+                to our Flask server to connect
+                All of our data and form a set of
+                HTTP requests.  </h3> </p>
             </div>
+            <div className="flex-child right">
+              <img src={exampleGif} />
+            </div>
+          </div>
         </div>
       </section>
 
-      <Carousel>
+      <Carousel style={{ backgroundColor: "white" }}>
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -72,7 +72,7 @@ export default function About() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://ww1.freelogovectors.net/wp-content/uploads/2018/07/tensorflow-logo.png?lossy=1&ssl=1"
+            src="https://ww2.freelogovectors.net/wp-content/uploads/2018/07/tensorflow-logo.png?lossy=1&w=2560&ssl=1"
             alt="Third slide"
           />
 
@@ -91,58 +91,58 @@ export default function About() {
         </Carousel.Item>
       </Carousel>
       <div className="beigeDiv">
-      <div>
-      <div className="techText"><h2><span class="dot aquaDot"></span>&nbsp;&nbsp;How Does It Work?</h2></div>
-        <div className="miniPoints">
-          <h2><span class="dot aquaDot"></span>&nbsp;&nbsp;Uploaded video gets sent to our database</h2>
-          <h2><span class="dot aquaDot"></span>&nbsp;&nbsp;Flask server sends video to RabbitMQ
-for video processing</h2>
-          <h2><span class="dot aquaDot"></span>&nbsp;&nbsp;Video processed for 10-15 minutes</h2>
-          <h2><span class="dot aquaDot"></span>&nbsp;&nbsp;Our NeRF worker receives the processed
-video and creates a 3D fly object to then
-be displayed on the page </h2>
+        <div>
+          <div className="techText"><h2><span class="dot aquaDot"></span>&nbsp;&nbsp;How Does It Work?</h2></div>
+          <div className="miniPoints">
+            <h2><span class="dot aquaDot"></span>&nbsp;&nbsp;Uploaded video gets sent to our database</h2>
+            <h2><span class="dot aquaDot"></span>&nbsp;&nbsp;Flask server sends video to RabbitMQ
+              for video processing</h2>
+            <h2><span class="dot aquaDot"></span>&nbsp;&nbsp;Video processed for 10-15 minutes</h2>
+            <h2><span class="dot aquaDot"></span>&nbsp;&nbsp;Our NeRF worker receives the processed
+              video and creates a 3D fly object to then
+              be displayed on the page </h2>
+          </div>
         </div>
-        </div>
-        <img src={explainDiagram}/>
+        <img src={explainDiagram} />
 
         <div>
-      <div className="techText"><h2><span class="dot orangeDot"></span>&nbsp;&nbsp;Back-End Structure and Framework</h2></div>
-        <div className="miniPoints">
-          <h2><span class="dot orangeDot"></span>&nbsp;&nbsp;NerF is a neural network that generates 
-novel views of complex 3D scenes with 2d 
-images and their coordinates</h2>
-          <h2><span class="dot orangeDot"></span>&nbsp;&nbsp;We take input images representing a 
-scene and interpolating between them 
-to render one complete scene</h2>
-          <h2><span class="dot orangeDot"></span>&nbsp;&nbsp;NeRF uses a sparse set of input views to 
-optimize a continuous volumetric scene 
-function</h2>
-          <h2><span class="dot orangeDot"></span>&nbsp;&nbsp;The result of this optimization is the ability
- to produce novel views of a complex 
-scene. </h2>
+          <div className="techText"><h2><span class="dot orangeDot"></span>&nbsp;&nbsp;Back-End Structure and Framework</h2></div>
+          <div className="miniPoints">
+            <h2><span class="dot orangeDot"></span>&nbsp;&nbsp;NerF is a neural network that generates
+              novel views of complex 3D scenes with 2d
+              images and their coordinates</h2>
+            <h2><span class="dot orangeDot"></span>&nbsp;&nbsp;We take input images representing a
+              scene and interpolating between them
+              to render one complete scene</h2>
+            <h2><span class="dot orangeDot"></span>&nbsp;&nbsp;NeRF uses a sparse set of input views to
+              optimize a continuous volumetric scene
+              function</h2>
+            <h2><span class="dot orangeDot"></span>&nbsp;&nbsp;The result of this optimization is the ability
+              to produce novel views of a complex
+              scene. </h2>
+          </div>
         </div>
-        </div>
-        <img src={colmapPic}/>
+        <img src={colmapPic} />
 
         <div>
-      <div className="techText"><h2><span class="dot pinkDot"></span>&nbsp;&nbsp;Webserver Structure and Framework</h2></div>
-        
-        <div className="miniPoints">
-          <h2><span class="dot pinkDot"></span>&nbsp;&nbsp;Flask web server serves as a connection 
-point that manages messages transmitting 
-between the frontend and the backend</h2>
-          <h2><span class="dot pinkDot"></span>&nbsp;&nbsp;MongoDB is a asynchronous messenger 
-that hoses the structure for motion queue 
-and NerF queue for backend video 
-processing.</h2>
-          <h2><span class="dot pinkDot"></span>&nbsp;&nbsp;MongoDB database servers as a place to 
-hold the input videos and output fly through 
-videos, as such implementation is easier for 
-the frontend and backend to access the 
-needed resources.</h2>
+          <div className="techText"><h2><span class="dot pinkDot"></span>&nbsp;&nbsp;Webserver Structure and Framework</h2></div>
+
+          <div className="miniPoints">
+            <h2><span class="dot pinkDot"></span>&nbsp;&nbsp;Flask web server serves as a connection
+              point that manages messages transmitting
+              between the frontend and the backend</h2>
+            <h2><span class="dot pinkDot"></span>&nbsp;&nbsp;MongoDB is a asynchronous messenger
+              that hoses the structure for motion queue
+              and NerF queue for backend video
+              processing.</h2>
+            <h2><span class="dot pinkDot"></span>&nbsp;&nbsp;MongoDB database servers as a place to
+              hold the input videos and output fly through
+              videos, as such implementation is easier for
+              the frontend and backend to access the
+              needed resources.</h2>
+          </div>
         </div>
-        </div>
-        </div>
+      </div>
 
     </div>
   )

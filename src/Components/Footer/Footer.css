@@ -1,0 +1,7 @@
+.gitImage {
+    height: 40px;
+}
+
+.gitImage a:hover {
+    display:inline-block;
+}
