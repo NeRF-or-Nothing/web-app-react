@@ -34,12 +34,13 @@
   background-color: #F8333C;
 }
 .carousel img{
-  width:100%;
+  width:90%;
   height:400px;
   margin:0%;
-  padding: 10px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
   background-color: #F8333C;
 }
 .beigeDiv{
@@ -50,8 +51,8 @@
   margin-left: 0%;
   margin-right: 0%;
   padding: 0%;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 .explainDiagram {
   padding-left:30px;
@@ -63,13 +64,14 @@
 }
 
 h2{
-  margin-top: 0px;
-  margin-bottom: 30px;
+  margin: 0px;
+  margin-top: 20px;
+  margin-bottom: 0px;
   color:black;
   font-weight: 600;
 }
 h3{
-  margin-top: 30px;
+  margin-top: 0px;
   color:white;
   font-weight: 600;
 }
@@ -85,7 +87,9 @@ h3{
 }
 .techText{
   margin-top: 0px;
+  margin-bottom: 0px;
   padding-top: 0%;
+  padding-bottom: 0%;
   text-align: center;
 }
 .flex-child {
@@ -110,8 +114,11 @@ h3{
     width: 30px;
     border-radius: 50%;
     display: inline-block;
-    
+    vertical-align: middle;
+    padding: 0%;
+    margin: 0%;
   }
+
  .blueDot{
   background-color: #00A8E8;
   }
@@ -129,7 +136,7 @@ h3{
 }
 .miniPoints{
   margin:auto;
-  width:50vw;
+  width:40%;
 }
 .orangeDot{
   background-color: #F8333C;
@@ -139,4 +146,11 @@ h3{
 }
 .beigeDiv{
   background-color: #FFF8D7;
+}
+.colmap_img{
+  padding: 0%;
+  margin: auto;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  border:2px solid #F8333C;
 }
