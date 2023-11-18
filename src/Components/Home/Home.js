@@ -8,11 +8,30 @@ import logo from "./logo.png";
 
 const fileTypes = ["MP4"];
 export default function Home(){
+
+    const [processingStatus, setProcessingStatus] = useState("");
     const [file, setFile] = useState(null);
     const handleChange = (file) => {
         console.log("file", file);
         setFile(file);
     };
+
+    const sendNerfVideo = (vidid) => {
+        fetch(`http://127.0.0.1:5000/nerfvideo/${vidid}`)
+          .then((response) => response.text())
+          .then((statusStr) => {
+            console.log(statusStr);
+            if (statusStr === "Video ready") {
+              // Handle the case where the video is ready (e.g., display a message or perform additional actions)
+            } else {
+                setProcessingStatus("Processing...");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching nerf video:", error);
+          });
+      };
+
     const uploadFile = () => {
         if (file && file[0].type !== '' && file[0].type !== 'unknown') {
           const formData = new FormData();
@@ -23,6 +42,7 @@ export default function Home(){
                 body: formData,
             }).then((response) => response.text()).then((text) => {
                 console.log(text);
+                sendNerfVideo(text);
         }).catch((error) => {
           console.error(error);
         });
@@ -68,6 +88,7 @@ export default function Home(){
                         />
                         <button onClick={uploadFile}>Upload Video</button>
                         <p>{file ? `File name: ${file[0].name}` : "no files uploaded yet"}</p>
+                        <p>{processingStatus}</p>
                     </div>
 
                 </div>
