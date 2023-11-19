@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import { FileUploader } from "react-drag-drop-files";
 import NavBar from "../NavbarLink/NavbarLink";
 import Footer from "../Footer/Footer";
@@ -13,6 +13,13 @@ export default function Home(){
     const [videoName, setVideoName] = useState("");
     const [videoUrl, setVideoUrl] = useState("");
     const [file, setFile] = useState(null);
+
+    useEffect(() => {
+      // This block will run after each render when videoUrl changes
+      console.log(videoUrl);
+      // You can perform additional actions here after videoUrl is updated
+    }, [videoUrl]);
+
     const handleChange = (file) => {
         console.log("file", file);
         setFile(file);
@@ -35,23 +42,40 @@ export default function Home(){
       };
 
 
-    const receiveVideo = async () => {
-      try {
-        const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
-        if (response.ok){
-          const blob = await response.blob();
-          const url = URL.createObjectURL(blob);
-          setVideoUrl(url);
-          
-          setProcessingStatus("Done!");
+    const receiveVideo = async (videoName) => {
+      let dots = "."
+      while (videoUrl == ''){
+        try {
+          console.log(videoName);
+          const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
+          if (response.ok){
+            console.log(response);
+            // if (response == ("http://127.0.0.1:5000/nerfvideo/"+videoName)){
+            //   continue;
+            // }
+            const blob = await response.blob();
+            if (blob.type == "video/mp4"){
+              console.log("VIDEO READY");
+              const url = URL.createObjectURL(blob);
+              console.log(url);
+              setVideoUrl(String(url));
+              setProcessingStatus("Done!");
+              break;
+            }
+          }
+          else {
+            setProcessingStatus("Error");
+          }
+        } catch(error){
+          console.log(error);
         }
-        else {
-          setProcessingStatus("Error");
-        }
-      } catch(error){
-        console.log(error);
+        dots = dots == "..." ? "." : dots + ".";
+        setProcessingStatus("Processing" + dots);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
+      
     }
+
 
     const uploadFile = () => {
         if (file && file[0].type !== '' && file[0].type !== 'unknown') {
@@ -64,8 +88,8 @@ export default function Home(){
             }).then((response) => response.text()).then((text) => {
                 console.log(text);
                 setVideoName(text);
-                setProcessingStatus("Processing.");
-                receiveVideo();
+                setProcessingStatus("Processing...");
+                receiveVideo(text);
         }).catch((error) => {
           console.error(error);
         });
