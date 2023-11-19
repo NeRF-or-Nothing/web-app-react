@@ -50,9 +50,6 @@ export default function Home(){
           const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
           if (response.ok){
             console.log(response);
-            // if (response == ("http://127.0.0.1:5000/nerfvideo/"+videoName)){
-            //   continue;
-            // }
             const blob = await response.blob();
             if (blob.type == "video/mp4"){
               console.log("VIDEO READY");
