@@ -14,47 +14,29 @@ export default function Home(){
     const [videoUrl, setVideoUrl] = useState("");
     const [file, setFile] = useState(null);
 
-    useEffect(() => {
-      // This block will run after each render when videoUrl changes
-      console.log(videoUrl);
-      // You can perform additional actions here after videoUrl is updated
-    }, [videoUrl]);
+
+    // use this for debugging
+    // useEffect(() => {
+    //   // This block will run after each render when videoUrl changes
+    //   console.log(videoUrl);
+    //   // You can perform additional actions here after videoUrl is updated
+    // }, [videoUrl]);
 
     const handleChange = (file) => {
         console.log("file", file);
         setFile(file);
     };
 
-    const sendNerfVideo = (vidid) => {
-        fetch(`http://127.0.0.1:5000/nerfvideo/${vidid}`)
-          .then((response) => response.text())
-          .then((statusStr) => {
-            console.log(statusStr);
-            if (statusStr === "Video ready") {
-              // Handle the case where the video is ready (e.g., display a message or perform additional actions)
-            } else {
-                setProcessingStatus("Processing...");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching nerf video:", error);
-          });
-      };
-
 
     const receiveVideo = async (videoName) => {
       let dots = "."
       while (videoUrl == ''){
         try {
-          console.log(videoName);
           const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
           if (response.ok){
-            console.log(response);
             const blob = await response.blob();
             if (blob.type == "video/mp4"){
-              console.log("VIDEO READY");
               const url = URL.createObjectURL(blob);
-              console.log(url);
               setVideoUrl(String(url));
               setProcessingStatus("Done!");
               break;
