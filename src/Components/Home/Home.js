@@ -10,6 +10,8 @@ const fileTypes = ["MP4"];
 export default function Home(){
 
     const [processingStatus, setProcessingStatus] = useState("");
+    const [videoName, setVideoName] = useState("");
+    const [videoUrl, setVideoUrl] = useState("");
     const [file, setFile] = useState(null);
     const handleChange = (file) => {
         console.log("file", file);
@@ -32,6 +34,25 @@ export default function Home(){
           });
       };
 
+
+    const receiveVideo = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
+        if (response.ok){
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          setVideoUrl(url);
+          
+          setProcessingStatus("Done!");
+        }
+        else {
+          setProcessingStatus("Error");
+        }
+      } catch(error){
+        console.log(error);
+      }
+    }
+
     const uploadFile = () => {
         if (file && file[0].type !== '' && file[0].type !== 'unknown') {
           const formData = new FormData();
@@ -42,7 +63,9 @@ export default function Home(){
                 body: formData,
             }).then((response) => response.text()).then((text) => {
                 console.log(text);
-                sendNerfVideo(text);
+                setVideoName(text);
+                setProcessingStatus("Processing.");
+                receiveVideo();
         }).catch((error) => {
           console.error(error);
         });
@@ -89,6 +112,7 @@ export default function Home(){
                         <button onClick={uploadFile}>Upload Video</button>
                         <p>{file ? `File name: ${file[0].name}` : "no files uploaded yet"}</p>
                         <p>{processingStatus}</p>
+                        {videoUrl !== '' && <video controls width="400" src={videoUrl} />}
                     </div>
 
                 </div>
