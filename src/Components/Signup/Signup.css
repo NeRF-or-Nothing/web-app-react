@@ -103,6 +103,27 @@ margin-bottom: 27px;
 font-family: 'Ubuntu', sans-serif;
 }
 
+.pass2 {
+    width: 76%;
+color: rgb(38, 50, 56);
+font-weight: 700;
+font-size: 14px;
+letter-spacing: 1px;
+background: rgba(136, 126, 126, 0.04);
+padding: 10px 20px;
+border: none;
+border-radius: 20px;
+outline: none;
+box-sizing: border-box;
+border: 2px solid rgba(0, 0, 0, 0.02);
+margin-bottom: 50px;
+margin-left: 46px;
+text-align: center;
+margin-bottom: 27px;
+font-family: 'Ubuntu', sans-serif;
+}
+
+
 
 .un:focus, .pass:focus {
     border: 2px solid rgba(0, 0, 0, 0.18) !important;
@@ -133,7 +154,7 @@ font-family: 'Ubuntu', sans-serif;
 
 a {
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: white ;
+    color: rgb(21, 134, 45) ;
     text-decoration: none
 }
 
@@ -149,6 +170,11 @@ div.login-div{
     position: absolute;
     text-align: left;
     margin-top: -100px;
+}
+.pass_alert{
+    text-align: center;
+    margin-left: -17vh;
+    color: rgb(214, 0, 0)
 }
 .nerfLogo{
     width: 100%;
