@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import { FileUploader } from "react-drag-drop-files";
 import NavBar from "../NavbarLink/NavbarLink";
 import Footer from "../Footer/Footer";
@@ -8,11 +8,54 @@ import logo from "./logo.png";
 
 const fileTypes = ["MP4"];
 export default function Home(){
+
+    const [processingStatus, setProcessingStatus] = useState("");
+    const [videoName, setVideoName] = useState("");
+    const [videoUrl, setVideoUrl] = useState("");
     const [file, setFile] = useState(null);
+
+
+    // use this for debugging
+    // useEffect(() => {
+    //   // This block will run after each render when videoUrl changes
+    //   console.log(videoUrl);
+    //   // You can perform additional actions here after videoUrl is updated
+    // }, [videoUrl]);
+
     const handleChange = (file) => {
         console.log("file", file);
         setFile(file);
     };
+
+
+    const receiveVideo = async (videoName) => {
+      let dots = "."
+      while (videoUrl == ''){
+        try {
+          const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
+          if (response.ok){
+            const blob = await response.blob();
+            if (blob.type == "video/mp4"){
+              const url = URL.createObjectURL(blob);
+              setVideoUrl(String(url));
+              setProcessingStatus("Done!");
+              break;
+            }
+          }
+          else {
+            setProcessingStatus("Error");
+          }
+        } catch(error){
+          console.log(error);
+        }
+        dots = dots == "..." ? "." : dots + ".";
+        setProcessingStatus("Processing" + dots);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+      
+    }
+
+
     const uploadFile = () => {
         if (file && file[0].type !== '' && file[0].type !== 'unknown') {
           const formData = new FormData();
@@ -23,6 +66,9 @@ export default function Home(){
                 body: formData,
             }).then((response) => response.text()).then((text) => {
                 console.log(text);
+                setVideoName(text);
+                setProcessingStatus("Processing...");
+                receiveVideo(text);
         }).catch((error) => {
           console.error(error);
         });
@@ -68,6 +114,8 @@ export default function Home(){
                         />
                         <button onClick={uploadFile}>Upload Video</button>
                         <p>{file ? `File name: ${file[0].name}` : "no files uploaded yet"}</p>
+                        <p>{processingStatus}</p>
+                        {videoUrl !== '' && <video controls width="400" src={videoUrl} />}
                     </div>
 
                 </div>
