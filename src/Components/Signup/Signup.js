@@ -6,6 +6,21 @@ function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleSignup = async (event) => {
+    event.preventDefault();
+    fetch('http://localhost:5000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {"username":username, "password":password}
+      }).then((response) => response.text()).then((text) => {
+        console.log(text);
+      }).catch((error) => {
+        console.error(error);
+      });
+  };
+
   const test = async (event) => {
     event.preventDefault();
       fetch('http://localhost:5000/test').then((response) => response.text()).then((text) => {
@@ -32,7 +47,7 @@ function Signup() {
             </span>{' '}
           </div>
         </p>
-        <form className="form1" onSubmit={test}>
+        <form className="form1" onSubmit={handleSignup}>
           <input
             className="un "
             type="text"
