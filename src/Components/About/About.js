@@ -103,7 +103,7 @@ export default function About() {
               be displayed on the page </h2>
           </div>
         </div>
-        <img src={explainDiagram} />
+        <img id="projectstructure" src={explainDiagram} />
 
         <div>
           <div className="techText"><h2><span class="dot orangeDot"></span>&nbsp;&nbsp;Back-End Structure and Framework</h2></div>
