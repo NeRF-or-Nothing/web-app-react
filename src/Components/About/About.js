@@ -1,21 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import exampleGif from "./example_output.gif";
 import explainDiagram from "./Full_Project.png";
 import box from "./box.png";
 import colmapPic from "./colmap.png";
 import Carousel from 'react-bootstrap/Carousel';
-import Container from 'react-bootstrap/Container';
 import NavBar from "../NavbarLink/NavbarLink";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import "./About.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function About() {
-  const [index, setIndex] = useState(0);
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
   return (
     <div>
       <NavBar />
@@ -26,7 +19,7 @@ export default function About() {
               <h1 className="jumbotron-heading">3D rendering <br />your videos made <div className="easy">easy.</div></h1>
             </div>
             <div className="flex-child right">
-              <img src={box} />
+              <img src={box} alt=""/>
             </div>
 
           </div>
@@ -43,7 +36,7 @@ export default function About() {
                 HTTP requests.  </h3> </p>
             </div>
             <div className="flex-child right">
-              <img src={exampleGif} />
+              <img src={exampleGif} alt="Example of the result of a NeRF rendering"/>
             </div>
           </div>
         </div>
@@ -103,7 +96,7 @@ export default function About() {
               be displayed on the page </h2>
           </div>
         </div>
-        <img id="projectstructure" src={explainDiagram} />
+        <img id="projectstructure" src={explainDiagram} alt="Diagram showing structure of the project, and how the data flows within it"/>
 
         <div>
           <div className="techText"><h2><span class="dot orangeDot"></span>&nbsp;&nbsp;Back-End Structure and Framework</h2></div>
@@ -122,7 +115,7 @@ export default function About() {
               scene. </h2>
           </div>
         </div>
-        <img src={colmapPic} />
+        <img src={colmapPic} alt="Several historic structures with density estimations"/>
 
         <div>
           <div className="techText"><h2><span class="dot pinkDot"></span>&nbsp;&nbsp;Webserver Structure and Framework</h2></div>

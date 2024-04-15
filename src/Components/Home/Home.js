@@ -1,8 +1,7 @@
-import React,{useState, useEffect} from "react";
+import React, {useState} from "react";
 import { FileUploader } from "react-drag-drop-files";
 import NavBar from "../NavbarLink/NavbarLink";
 import Footer from "../Footer/Footer";
-import Axios from "axios";
 import "./Home.css";
 import logo from "./logo.png";
 
@@ -10,7 +9,6 @@ const fileTypes = ["MP4"];
 export default function Home(){
 
     const [processingStatus, setProcessingStatus] = useState("");
-    const [videoName, setVideoName] = useState("");
     const [videoUrl, setVideoUrl] = useState("");
     const [file, setFile] = useState(null);
 
@@ -30,12 +28,12 @@ export default function Home(){
 
     const receiveVideo = async (videoName) => {
       let dots = "."
-      while (videoUrl == ''){
+      while (videoUrl === ''){
         try {
           const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
           if (response.ok){
             const blob = await response.blob();
-            if (blob.type == "video/mp4"){
+            if (blob.type === "video/mp4"){
               const url = URL.createObjectURL(blob);
               setVideoUrl(String(url));
               setProcessingStatus("Done!");
@@ -48,11 +46,11 @@ export default function Home(){
         } catch(error){
           console.log(error);
         }
-        dots = dots == "..." ? "." : dots + ".";
+        dots = dots === "..." ? "." : dots + ".";
         setProcessingStatus("Processing" + dots);
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
-      
+
     }
 
 
@@ -66,7 +64,6 @@ export default function Home(){
                 body: formData,
             }).then((response) => response.text()).then((text) => {
                 console.log(text);
-                setVideoName(text);
                 setProcessingStatus("Processing...");
                 receiveVideo(text);
         }).catch((error) => {
@@ -88,7 +85,7 @@ export default function Home(){
                 <div className="topBox">
                     {/* start of topNerfPic div */}
                     <div className="topNerfPic">
-                        <img className="nerfLogo" src={logo}/>
+                        <img className="nerfLogo" src={logo} alt="Project team logo"/>
                     </div>
 
                     <h2 className="generationText" style={{paddingBottom:"4vh"}}>The next generation object rendering technology utilizing the Neural Radiance Field technology.
@@ -104,7 +101,7 @@ export default function Home(){
                         <h2 style={{paddingTop:"4vh"}}>Drag a file of the video you <br/> want to be rendered and watch <br/> the magic happen.
                         </h2>
 
-                        <h4 style={{paddingTop:"3vh"}}>*Video file must be in .mp4 or mov format.</h4>
+                        <h4 style={{paddingTop:"3vh"}}>*Video file must be in .mp4 format.</h4>
                         <FileUploader
                             multiple={true}
                             handleChange={handleChange}
