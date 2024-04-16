@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import logo from './pure_logo.png';
+import NavBar from "../NavbarLink/NavbarLink";
+import Footer from '../Footer/Footer';
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [result, setResult] = useState('');
 
   const handleSignup = async (event) => {
     event.preventDefault();
@@ -13,9 +16,10 @@ function Signup() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: {"username":username, "password":password}
+        body: JSON.stringify({"username": username, "password": password })
       }).then((response) => response.text()).then((text) => {
         console.log(text);
+        setResult(text);
       }).catch((error) => {
         console.error(error);
       });
@@ -34,6 +38,7 @@ function Signup() {
 
   return (
     <body>
+      <NavBar/>
       <div class="logo">
         <img className="nerfLogo" src={logo}/>
       </div>
@@ -47,6 +52,7 @@ function Signup() {
             </span>{' '}
           </div>
         </p>
+        <p>{result}</p>
         <form className="form1" onSubmit={handleSignup}>
           <input
             className="un "
@@ -55,7 +61,6 @@ function Signup() {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            ////
             required
           />
           <input
@@ -72,6 +77,7 @@ function Signup() {
           </button>
         </form>
       </div>
+      <Footer/>
     </body>
   );
 }
