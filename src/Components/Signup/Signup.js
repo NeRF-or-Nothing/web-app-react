@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
+import NavBar from "../NavbarLink/NavbarLink";
 import logo from './pure_logo.png';
 
 function Signup() {
@@ -21,7 +22,7 @@ function Signup() {
       });
   };
 
-  const test = async (event) => {
+  /*const test = async (event) => {
     event.preventDefault();
       fetch('http://localhost:5000/test').then((response) => response.text()).then((text) => {
         console.log(text);
@@ -30,12 +31,14 @@ function Signup() {
       });
       //const data = await response.json();
       // console.log(data);
-    } 
+  }*/
 
   return (
     <body>
+      <div>
+        <NavBar/>
       <div class="logo">
-        <img className="nerfLogo" src={logo}/>
+        <img className="nerfLogo" src={logo} alt="Project logo"/>
       </div>
       <div class="main">
         <p class="sign">
@@ -71,6 +74,7 @@ function Signup() {
             Create account
           </button>
         </form>
+      </div>
       </div>
     </body>
   );

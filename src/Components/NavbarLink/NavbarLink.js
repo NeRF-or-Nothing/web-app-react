@@ -4,10 +4,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from "./pure_logo.png";
 import {Link} from "react-router-dom";
+import "./NavbarLink.css"
 
 function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{marginBottom:"10px"}}>
       <Container>
       <Navbar.Brand><Link to="../Home">NeRF</Link></Navbar.Brand>
         {/* <Navbar.Brand><Link to="../Home"><img src={logo} id="navLogo"/></Link></Navbar.Brand> */}
