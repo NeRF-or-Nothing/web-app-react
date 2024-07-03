@@ -29,30 +29,28 @@ export default function Home(){
 
 
     const receiveVideo = async (videoName) => {
-      let dots = "."
-      while (videoUrl == ''){
-        try {
-          const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
-          if (response.ok){
-            const blob = await response.blob();
-            if (blob.type == "video/mp4"){
-              const url = URL.createObjectURL(blob);
-              setVideoUrl(String(url));
-              setProcessingStatus("Done!");
-              break;
-            }
-          }
-          else {
-            setProcessingStatus("Error");
-          }
-        } catch(error){
-          console.log(error);
+      let dots = ".";
+      let intervalId = setInterval(async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/nerfvideo/${videoName}`);
+        if (response.ok){
+        const blob = await response.blob();
+        if (blob.type == "video/mp4"){
+          const url = URL.createObjectURL(blob);
+          setVideoUrl(String(url));
+          setProcessingStatus("Done!");
+          clearInterval(intervalId);
         }
-        dots = dots == "..." ? "." : dots + ".";
-        setProcessingStatus("Processing" + dots);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+        else {
+        setProcessingStatus("Error");
+        }
+      } catch(error){
+        console.log(error);
       }
-      
+      dots = dots == "..." ? "." : dots + ".";
+      setProcessingStatus("Processing" + dots);
+      }, 30000);
     }
 
 
