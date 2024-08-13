@@ -5,6 +5,20 @@
 # High Level overview of the contribution for F22:
 For the Fall-Winter 2022 Semester, We decided to redo the front end in React instead of Vue, in order to make it more beginner frandly. Some of the important mile stopes I did this semester is that I made a comprehansive deisgn of the website, and how the website should look like. Also I made all the pages and routed them properly. Besides that, I utilized bootstrap to make a navigation bar component to let users go to different pages of the website.
 
+# If you want to access the website from other devices on the same network
+ 1. Until A reverse proxy is implemented, I would recommend using some free tunneling service like ngrok to expose the backend to the entire network. "npm start" will already expose the frontend to the network.
+  - You can conveniently, enter the tunneling service ip in the .env file as REACT_APP_API_URL 
+  - I'd recommend creating a domain with ngrok first, so that the url doesnt change every time you start the tunnel.
+ 2. If you are running the frontend on wsl2, you will most likely need to 
+  - find the wsl-to-windows network adapter ip
+  - update the create-react-app start script to listen on all interfaces
+  - configure windows firewall to allow incoming connections on the port given by npm start
+  - Set up port forwarding in powershell
+  - Connect to the frontend via the ipv4 of the windows host machine
+
+I have provided a batch script called "expose_from_wsl" that does all of the steps from (2). You should copy this batch file to windows and run it there.
+
+
 # Some of the Future Plans for this Front-end Branch of the NerF project:
 * Connect the front-end with the backend
 * Complete the Community page

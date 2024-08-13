@@ -6,7 +6,7 @@
     
     .main {
         width: 700px;
-        height: 400px;
+        height: 400px auto;
         margin: 7em auto;
         border-radius: 1.5em;
     }

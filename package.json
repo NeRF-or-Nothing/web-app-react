@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
     "bootstrap": "^5.2.3",
+    "https": "^1.0.0",
     "mdb-react-ui-kit": "^5.1.0",
     "mongodb": "^6.5.0",
     "react": "^18.2.0",
@@ -24,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HOST=0.0.0.0 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

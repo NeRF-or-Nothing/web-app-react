@@ -1,7 +1,23 @@
-.gitImage {
+body, #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .content {
+    flex: 1 0 auto;
+  }
+  
+  footer {
+    flex-shrink: 0;
+  }
+  
+  .gitImage {
     height: 40px;
-}
-
-.gitImage a:hover {
-    display:inline-block;
-}
+  }
+  
+  .gitImage a:hover {
+    display: inline-block;
+  }
