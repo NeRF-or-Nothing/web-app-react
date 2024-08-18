@@ -11,19 +11,23 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../NavbarLink/NavbarLink';
 import Footer from '../Footer/Footer';
 import VideoUpload from './VideoUpload/VideoUpload';
-import JobStatus from './JobStatus';
-import { POSTResponse } from '../../Types/Responses';
+import { MetadataResponse, SceneMetadataResponse } from '../../Types/Responses';
 import { AuthContext } from '../../Context/AuthContext';
-import { fetchMetadata } from '../../Util/CommonFetch';
-import { MetadataResponse } from '../../Types/Responses';
+import { fetchSceneMetadata } from '../../Util/CommonApiCalls';
 
+/**
+ * 
+ * @returns Home page with video upload form and job status component.
+ * Allows option to navigate to scene/history page if resources are generated.
+ */
 const Home: React.FC = () => {
   /**
    * State variables to store job information and status,
-   * authentication token, and navigation to the scene to a different route.
+   * authentication token, and navigation to the scene.
    */
-  const [jobInfo, setJobInfo] = useState<POSTResponse | null>(null);
-  const [jobFinished, setJobFinished] = useState(false);
+  const [jobInfo, setJobInfo] = useState<MetadataResponse | null>(null);
+  const [resourceGenerated, setResourceGenerated] = useState(false);
+  const [sceneId, setSceneId] = useState<string | null>(null);
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -33,16 +37,19 @@ const Home: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       if (jobInfo) {
-        const metadata: MetadataResponse = await fetchMetadata(
-          jobInfo.uuid,
+        const sceneMetadata = await fetchSceneMetadata(
+          jobInfo.id,
           token ? token : ''
         );
-        if (metadata) {
-          const isJobFinished = Object.values(metadata.resources).some(
+
+        // Check if any resources have been generated
+        if (sceneMetadata !== null) {
+          const isResourceGenerated = Object.values(sceneMetadata.resources).some(
             (resource) =>
               Object.values(resource).some((iteration) => iteration.exists)
           );
-          setJobFinished(isJobFinished);
+          setResourceGenerated(isResourceGenerated);
+          setSceneId(sceneMetadata.meta.id);
         }
       }
     }, 15000);
@@ -50,7 +57,7 @@ const Home: React.FC = () => {
     return () => clearInterval(interval);
   }, [jobInfo, token]);
 
-  const handleUploadSuccess = (newJobInfo: POSTResponse) => {
+  const handleUploadSuccess = (newJobInfo: MetadataResponse) => {
     setJobInfo(newJobInfo);
   };
 
@@ -58,8 +65,15 @@ const Home: React.FC = () => {
     navigate('/History');
   };
 
+  const handleGoToScene = () => {
+    if (sceneId) {
+      navigate(`/Scene?scene_id=${sceneId}`);
+    }
+  };
+
   /**
    * Render the home page with the video upload form and job status component.
+   * Navigate to scene/history page if resources are generated.
    */
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -84,23 +98,31 @@ const Home: React.FC = () => {
                   *TensoRF is no longer accepting new video uploads.
                 </p>
                 <VideoUpload onUploadSuccess={handleUploadSuccess} />
-                {jobInfo && (
-                  <>
-                    <JobStatus jobInfo={jobInfo} />
-                    {jobFinished && (
-                      //@ts-ignore
-                      <Button
-                        variant="primary"
-                        onClick={handleGoToHistory}
-                        className="mx-auto d-block mt-3"
-                      >
-                        Go to History
-                      </Button>
-                    )}
-                  </>
-                )}
               </Col>
             </Row>
+            {jobInfo && (
+              <Row className="mt-3">
+                <Col md={8} className="mx-auto">
+                  <div className="bg-light p-3 rounded">
+                    <h4 className="text-center">Job Information</h4>
+                    <p className="text-center">Job ID: {jobInfo.id}</p>
+                  </div>
+                </Col>
+              </Row>
+            )}
+            {resourceGenerated && (
+              <Row className="mt-3">
+                <Col md={8} className="mx-auto d-flex justify-content-center">
+                  {/*@ts-ignore*/}
+                  <Button onClick={handleGoToHistory} className="me-2">
+                    Go to History
+                  </Button>
+                  <Button onClick={handleGoToScene}>
+                    Go to Scene
+                  </Button>
+                </Col>
+              </Row>
+            )}
           </Container>
         </div>
       </div>

@@ -28,7 +28,8 @@
     "start": "HOST=0.0.0.0 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start_wsl_to_windows": "./start_wsl_to_windows.sh"
   },
   "eslintConfig": {
     "extends": [

@@ -30,7 +30,7 @@ function NavBar(): JSX.Element {
             className="me-2"
             style={{ height: '40px', width: 'auto' }}
           />
-          <span>NeRF-Or-Nothing</span>
+          <span>NeRF-or-Nothing</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

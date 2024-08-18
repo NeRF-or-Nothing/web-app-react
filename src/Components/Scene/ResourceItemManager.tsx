@@ -9,7 +9,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Card, ListGroup, Spinner, Alert, Badge, Container, Row, Col } from 'react-bootstrap';
 import ResourceItem from './ResourceItem';
-import { MetadataResponse } from '../../Types/Responses';
+import { SceneMetadataResponse, MetadataResponse } from '../../Types/Responses';
 import { AuthContext } from '../../Context/AuthContext';
 import { BACKEND_URL } from '../../Util/Constants';
 import SplatCloudHandler from './OutputHandlers/SplatCloud/SplatCloudHandler';
@@ -18,18 +18,18 @@ import PointCloudHandler from './OutputHandlers/PointCloud/PointCloudHandler';
 import VideoHandler from './OutputHandlers/Video/VideoHandler';
 
 interface ResourceItemManagerProps {
-  uuid: string;
+  sceneID: string;
 }
 /**
  * Allows the user to fetch and display resources associated with a scene.
- * @param uuid Scene Id
+ * @param sceneID Scene Id
  * @returns 
  */
-const ResourceItemManager = ({ uuid }: ResourceItemManagerProps) => {
-  const [metadata, setMetadata] = useState<MetadataResponse | null>(null);
+const ResourceItemManager = ({ sceneID }: ResourceItemManagerProps) => {
   const [metadataFetched, setMetadataFetched] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [metadata, setMetadata] = useState<SceneMetadataResponse | null>(null);
   const [activeResource, setActiveResource] = useState<{ type: string, data: ArrayBuffer } | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const { token } = useContext(AuthContext);
 
   /**
@@ -38,8 +38,8 @@ const ResourceItemManager = ({ uuid }: ResourceItemManagerProps) => {
   useEffect(() => {
     const fetchMetadata = async () => {
       try {
-        console.log("Fetching from ", `${BACKEND_URL}/data/metadata/${uuid}`);
-        const response = await fetch(`${BACKEND_URL}/data/metadata/${uuid}`, {
+        console.log("Fetching from ", `${BACKEND_URL}/data/metadata/${sceneID}`);
+        const response = await fetch(`${BACKEND_URL}/data/metadata/${sceneID}`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const ResourceItemManager = ({ uuid }: ResourceItemManagerProps) => {
 
         console.log('Metadata RCVD:', data);
 
-        setMetadata(data as MetadataResponse);
+        setMetadata(data as SceneMetadataResponse);
         setMetadataFetched(true);
         setError(null);
       } catch (error) {
@@ -70,7 +70,7 @@ const ResourceItemManager = ({ uuid }: ResourceItemManagerProps) => {
 
       return () => clearInterval(interval);
     }
-  }, [uuid, metadataFetched, token]);
+  }, [sceneID, metadataFetched, token]);
 
   /**
    * Fetches the selected resource as a binary buffer, uses range requests to fetch 
@@ -101,9 +101,9 @@ const ResourceItemManager = ({ uuid }: ResourceItemManagerProps) => {
       const end =
         i === chunks - 1 ? resourceInfo.size - 1 : start + 1024 * 1024 - 1;
 
-      console.log("Fetching from ", `${BACKEND_URL}/data/nerf/${resourceType}/${uuid}?iteration=${iteration}`);
+      console.log("Fetching from ", `${BACKEND_URL}/data/nerf/${resourceType}/${sceneID}?iteration=${iteration}`);
       const response = await fetch(
-        `${BACKEND_URL}/data/nerf/${resourceType}/${uuid}?iteration=${iteration}`,
+        `${BACKEND_URL}/data/nerf/${resourceType}/${sceneID}?iteration=${iteration}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

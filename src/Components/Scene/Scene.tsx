@@ -8,55 +8,54 @@ import { useLocation, Navigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 import { AuthContext } from '../../Context/AuthContext';
 import ResourceItemManager from './ResourceItemManager';
-import { fetchMetadata } from '../../Util/CommonFetch';
+import { fetchSceneMetadata } from '../../Util/CommonApiCalls';
 import NavBar from '../NavbarLink/NavbarLink';
 import Footer from '../Footer/Footer';
+import { SceneMetadataResponse } from '../../Types/Responses';
 
 /**
  * Component for displaying scene metadata and ResourceManager.
  */
 const Scene = () => {
   const location = useLocation();
-  const [metadata, setMetadata] = useState<any>(null);
+  const [metadata, setMetadata] = useState<SceneMetadataResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { token } = useContext(AuthContext);
-
   const searchParams = new URLSearchParams(location.search);
-  const uuid = searchParams.get('uuid') || '';
+  const sceneID = searchParams.get('scene_id') || '';
   const sceneName = searchParams.get('name') || 'Unnamed Scene';
 
-
   /**
-   * Fetches scene metadata and sets it in state.
+   * Attempts to fetch scene metadata every 15s until successful.
+   * Sets metadata state if successful.
    */
   useEffect(() => {
-    const fetchSceneMetadata = async () => {
-      if (token) {
-        try {
-          const data = await fetchMetadata(uuid, token);
-          setMetadata(data);
-          setError(null);
-        } catch (error) {
-          console.error('Error fetching metadata:', error);
-          setError('Failed to load scene data. Please try again later.');
+    const handleFetchSceneMetadata = async () => {
+      try {
+        const metadata: SceneMetadataResponse = await fetchSceneMetadata(
+          sceneID,
+          token ? token : ''
+        );
+
+        if (metadata) {
+          setMetadata(metadata);
         }
+      } catch (error) {
+        console.error(`Error fetching job data for ${sceneID}:`, error);
+        setError('Failed to load scene data. Please try again later.');
       }
     };
 
     const interval = setInterval(() => {
       if (!metadata) {
-        fetchSceneMetadata();
+        handleFetchSceneMetadata();
       }
     }, 15000);
 
-    if (!metadata) {
-      fetchSceneMetadata();
-    }
-
     return () => clearInterval(interval);
-  }, [uuid, token, metadata]);
+  }, [sceneID, token, metadata]);
 
-  if (!uuid) {
+  if (!sceneID) {
     return <Navigate to="/" replace />;
   }
 
@@ -81,10 +80,10 @@ const Scene = () => {
                   </div>
                 ) : (
                   <div>
-                    <Card.Title as="h2" className="mb-1 text-dark" >
+                    <Card.Title as="h2" className="mb-1 text-dark">
                       Scene: {sceneName || 'Unnamed Scene'}
                     </Card.Title>
-                    <ResourceItemManager uuid={uuid}/>
+                    <ResourceItemManager sceneID={sceneID} />
                   </div>
                 )}
               </Card.Body>

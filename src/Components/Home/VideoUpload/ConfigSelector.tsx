@@ -6,6 +6,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Badge, InputGroup } from 'react-bootstrap';
+import { TrainingConfig } from '../../../Types/TrainingConfig';
 
 const VALID_OUTPUT_TYPES = {
   gaussian: ['splat_cloud', 'point_cloud', 'video'],
@@ -14,19 +15,15 @@ const VALID_OUTPUT_TYPES = {
 
 const VALID_TRAINING_MODES = ['gaussian', 'tensorf'];
 
-const RECOMMENDED_CONFIG = {
+const RECOMMENDED_CONFIG: TrainingConfig = {
   trainingMode: 'gaussian',
   outputTypes: ['point_cloud', 'splat_cloud'],
   saveIterations: [7000, 30000],
+  sceneName: '',
 };
 
 interface ConfigSelectorProps {
-  onConfigChange: (config: {
-    trainingMode: string;
-    outputTypes: string[];
-    saveIterations: number[];
-    sceneName: string;
-  }) => void;
+  onConfigChange: (config: TrainingConfig) => void;
 }
 
 /**
@@ -89,15 +86,6 @@ const ConfigSelector: React.FC<ConfigSelectorProps> = ({ onConfigChange }) => {
     }
   };
 
-  const handleSaveIterationKeyPress = (
-    event: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      handleSaveIterationAdd();
-    }
-  };
-
   const handleRemoveIteration = (iteration: number) => {
     const newSaveIterations = saveIterations.filter((i) => i !== iteration);
     setSaveIterations(newSaveIterations);
@@ -128,7 +116,7 @@ const ConfigSelector: React.FC<ConfigSelectorProps> = ({ onConfigChange }) => {
    * Renders the configuration form.
    */
   return (
-    <Form>
+    <Form.Group>
       <Form.Group controlId="useRecommended" className="mb-3">
         <Form.Check
           type="checkbox"
@@ -180,7 +168,12 @@ const ConfigSelector: React.FC<ConfigSelectorProps> = ({ onConfigChange }) => {
             max="30000"
             value={currentIteration}
             onChange={handleSaveIterationChange}
-            onKeyPress={handleSaveIterationKeyPress}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault();
+                handleSaveIterationAdd();
+              }
+            }}
             disabled={useRecommended}
           />
           {/*@ts-ignore*/}
@@ -217,7 +210,7 @@ const ConfigSelector: React.FC<ConfigSelectorProps> = ({ onConfigChange }) => {
           onChange={handleSceneNameChange}
         />
       </Form.Group>
-    </Form>
+    </Form.Group>
   );
 };
 

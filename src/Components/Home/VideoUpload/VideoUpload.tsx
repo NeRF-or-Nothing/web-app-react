@@ -5,35 +5,29 @@
 
 import React, { useContext, useState } from 'react';
 import { Form, Button, Alert, ProgressBar } from 'react-bootstrap';
-import { POSTResponse } from '../../../Types/Responses';
+import { MetadataResponse } from '../../../Types/Responses';
 import { AuthContext } from '../../../Context/AuthContext';
+import { fetchPostVideo } from '../../../Util/CommonApiCalls';
 import ConfigSelector from './ConfigSelector';
-import { BACKEND_URL } from '../../../Util/Constants';
+import { TrainingConfig } from '../../../Types/TrainingConfig';
 
 interface VideoUploadProps {
-  onUploadSuccess: (jobInfo: POSTResponse) => void;
+  onUploadSuccess: (data: MetadataResponse) => void;
 }
 
-/**
- * Handles file upload and configuration selection. Sends POST to /video
- * requires user to be authenticated. Decodes response json as POSTResponse
- * 
- * TODO: Probably refactor POSTResponse to something more specific
- * 
- * @param param0 - onUploadSuccess handler
- * @returns ConfigSelector component and upload button
- */
+
+
 const VideoUpload: React.FC<VideoUploadProps> = ({ onUploadSuccess }) => {
+
+  /**
+   * State variables to store video file, upload status, training config, 
+   * auth token, and error message.
+   */
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const { token } = useContext(AuthContext);
-  const [config, setConfig] = useState<{
-    trainingMode: string;
-    outputTypes: string[];
-    saveIterations: number[];
-    sceneName: string;
-  }>({
+  const [error, setError] = useState<string | null>(null);
+  const [config, setConfig] = useState<TrainingConfig>({
     trainingMode: 'gaussian',
     outputTypes: [],
     saveIterations: [],
@@ -60,8 +54,8 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onUploadSuccess }) => {
   };
 
   /**
-   * 
-   * @returns POST request to upload video file
+   * @desc POSTs video file and config to backend for processing.
+   * @returns void
    */
   const handleUpload = async () => {
     if (!file) return;
@@ -69,50 +63,16 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onUploadSuccess }) => {
     setUploading(true);
     setError(null);
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('training_mode', config.trainingMode);
-    formData.append('output_types', config.outputTypes.join(','));
-    formData.append('save_iterations', config.saveIterations.join(','));
-    formData.append('total_iterations', Math.min(Math.max(...config.saveIterations), 30000).toString());
-    formData.append('scene_name', config.sceneName);
-
-    console.log('Uploading video:', file, config);
-    console.log("Scene name", formData.get('scene_name'));
-
-    try {
-      console.log("Fetching from ", `${BACKEND_URL}/video`);
-      const response = await fetch(`${BACKEND_URL}/video`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const responseData = await response.json();
-      const metadataString = response.headers.get('X-Metadata');
-
-      if (!response.ok) {
-        throw new Error(responseData.message || `HTTP error! status: ${response.status}`);
-      }
-
-      if (!metadataString) {
-        throw new Error('No metadata received');
-      }
-
-      const metadata = JSON.parse(metadataString);
-
-      onUploadSuccess({
-        meta: metadata,
-        uuid: metadata.uuid,
-        config: responseData,
-      });
-    } catch (error) {
-      console.error('Upload error:', error);
-      setError(error instanceof Error ? error.message : String(error));
-    } finally {
-      setUploading(false);
+    const metadata = await fetchPostVideo(
+      file,
+      config,
+      token ? token : ''
+    );
+    
+    if (metadata !== null) {
+      onUploadSuccess(metadata);
+    } else {
+      setError('Upload failed');
     }
   };
 
@@ -122,10 +82,10 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onUploadSuccess }) => {
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Control type="file" accept=".mp4" onChange={handleFileChange} />
         </Form.Group>
-
         {file && (
           <>
             <ConfigSelector onConfigChange={handleConfigChange} />
+            {/* @ts-ignore */}
             <Button
               variant="primary"
               onClick={handleUpload}
@@ -136,8 +96,6 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onUploadSuccess }) => {
             </Button>
           </>
         )}
-
-        {uploading && <ProgressBar animated now={100} className="mt-3" />}
         {error && (
           <Alert variant="danger" className="mt-3">
             {error}

@@ -35,7 +35,7 @@ const UserSceneHistory: React.FC = () => {
   const navigate = useNavigate();
 
   /**
-   * Fetches the user's scene history from the backend and sets it in state.
+   * Fetches the user's scene history from the backend and sets it in state. 
    */
   const fetchUserHistory = useCallback(async () => {
     try {
@@ -43,7 +43,6 @@ const UserSceneHistory: React.FC = () => {
       const response = await fetch(`${BACKEND_URL}/history`, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "ngrok-skip-browser-warning": "true",
         },
       });
       if (!response.ok) {

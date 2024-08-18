@@ -3,36 +3,21 @@
  * @desc This file contains type declarations for decoding JSON responses from the backend.
  */
 
-
 /**
- * JSON structure of the POST response to /video from the backend.
- * TODO: Probably refactor POSTResponse to something more specific
- */
-export type POSTResponse = {
-  meta: {
-    status: string;
-    error: string;
-    message: string;
-  };
-  uuid: string;
-  config: {
-    training_mode: string;
-    output_types: string | string[];
-    save_iterations: string | number[];
-    total_iterations: string | number;
-  };
-};
-
-/**
- * JSON structure of the metadata response from the backend.
+ * JSON structure of metadata any "resource associated" response from the backend.
+ * (i.e, not /login or /register)
  */
 export interface MetadataResponse {
-  meta: {
-    uuid: string;
-    status: number;
-    error: number;
+    id: string;
+    error: string;
     message: string;
-  };
+}
+
+/**
+ * JSON structure of scene metadata response from the backend.
+ */
+export interface SceneMetadataResponse {
+  meta : MetadataResponse
   resources: {
     [outputType: string]: {
       [iteration: string]: {
@@ -44,3 +29,33 @@ export interface MetadataResponse {
     };
   };
 }
+
+/**
+ * JSON structure of user history response from the backend.
+ * Contains metadata and list of scene ids.
+ */
+export interface UserHistoryResponse {
+  meta: MetadataResponse;
+  resources: string[];
+}
+
+/**
+ * JSON structure of scene name response from the backend.
+ */
+export interface SceneNameResponse {
+  meta: MetadataResponse;
+  name: string;
+}
+
+/**
+ * JSON strucutre of scene queue position response from the backend.
+ */
+
+export interface SceneQueuePositionResponse {
+  meta: MetadataResponse;
+  stage: string;
+  position: number;
+}
+
+
+

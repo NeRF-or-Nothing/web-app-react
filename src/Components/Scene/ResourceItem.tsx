@@ -71,7 +71,7 @@ const ResourceItem: React.FC<ResourceItemProps> = ({
           </Form.Select>
         </Form.Group>
         <div className="mt-auto">
-          {/*@ts-ignore (weird eslint error that does nothing with bootstrap buttons)*/} 
+          {/*@ts-ignore*/}
           <Button 
             onClick={handleGetResource} 
             disabled={!exists || isLoading}

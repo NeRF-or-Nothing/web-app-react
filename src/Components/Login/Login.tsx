@@ -6,99 +6,80 @@
 import './Login.css';
 import NavBar from '../NavbarLink/NavbarLink';
 import Footer from '../Footer/Footer';
+import { fetchLogin } from '../../Util/CommonApiCalls';
 import { AuthContext } from '../../Context/AuthContext';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../Util/Constants';
 
 /**
- * 
- * @returns Login form with username and password fields.
+ *
+ * @returns Login form with username and password fields, handlers for login form submission.
  */
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); 
+  const { login } = useContext(AuthContext);
 
   /**
    * Handles login form submission via POST to /login. Requires HTTPS.
    * @param event Submit Button Click
    */
-  const handleLogin = async (event: { preventDefault: () => void; }) => {
+  const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setError('');
 
     try {
-      console.log("Fetching from ", `${BACKEND_URL}/login`);
-      const response = await fetch(`${BACKEND_URL}/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({ username, password }),
-      });
-
-      const data = await response.json();
-      const metadataString = response.headers.get('X-Metadata');
-
-      console.log('response:', data);
-      console.log('metadata:', metadataString);
-
-      if (!response.ok || !metadataString) {
-        throw new Error(data.message || 'Login failed');
-      }
-
-      const metadata = JSON.parse(metadataString);
-
-
-      if (metadata.status === 'ERROR') {
-        throw new Error(metadata.message);
-      }
+      const token = await fetchLogin(username, password);
 
       // Login successful
-      login(data.jwtToken, username);
-      navigate('/');
+      if (token) {
+        login(token, username);
+        navigate('/');
+      }
     } catch (error: any) {
       setError(error.message);
     }
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div className="login-container">
       <NavBar />
-      <div className="main">
-        <p className="sign">
-          <div>Login</div>
-          <div className="login-div">
-            <span className="noAccount">
-              Don't have an account? <a href="./Signup">Sign Up</a>
-            </span>
+      <div className="main-content">
+        <div className="main">
+          <div className="sign">
+            <div>Login</div>
+            <div className="login-div">
+              <span className="noAccount">
+                Don't have an account? <a href="./Signup">Sign Up</a>
+              </span>
+            </div>
           </div>
-        </p>
-        {error && <p className="error">{error}</p>}
-        <form className="form1" onSubmit={handleLogin}>
-          <input
-            className="un"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <input
-            className="pass"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit" className="submit">
-            Log in
-          </button>
-        </form>
+          {error && <p className="error">{error}</p>}
+          <form className="form1" onSubmit={handleLogin}>
+            <input
+              className="un"
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <input
+              className="pass"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit" className="submit">
+              Log in
+            </button>
+          </form>
+        </div>
       </div>
       <Footer />
     </div>
@@ -106,4 +87,3 @@ function Login() {
 }
 
 export default Login;
-
