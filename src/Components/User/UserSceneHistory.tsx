@@ -8,7 +8,7 @@ import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, Pagination, Form, Alert } from 'react-bootstrap';
 import { AuthContext } from '../../Context/AuthContext';
-import { BACKEND_URL } from '../../Util/Constants';
+import { fetchUserSceneHistory, fetchSceneName, fetchSceneThumbnail } from '../../Util/CommonApiCalls';
 import NavBar from '../NavbarLink/NavbarLink';
 import Footer from '../Footer/Footer';
 
@@ -22,7 +22,9 @@ type PreviewsState = {
 };
 
 /**
- * @returns Page with grid containing subset of users scene history
+ * @desc Fetches scene previews and names from the backend and displays them in a grid.
+ * Clicking on a preview navigates to the scene page.
+ * @returns Paginated Grid of scene previews from the user's history.
  */
 const UserSceneHistory: React.FC = () => {
   const [sceneIds, setSceneIds] = useState<string[]>([]);
@@ -35,70 +37,50 @@ const UserSceneHistory: React.FC = () => {
   const navigate = useNavigate();
 
   /**
-   * Fetches the user's scene history from the backend and sets it in state. 
+   * Handles fetching the user's scene history from the backend and sets it in state. 
    */
-  const fetchUserHistory = useCallback(async () => {
-    try {
-      console.log("Fetching from ", `${BACKEND_URL}/history`);
-      const response = await fetch(`${BACKEND_URL}/history`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      setSceneIds(data.resources || []);
-    } catch (error) {
-      console.error('Error fetching user history:', error);
+  const handleUserSceneHistory = useCallback(async () => {
+    const userSceneHistory = await fetchUserSceneHistory(token ? token : '');
+
+    setIsLoading(false);
+    if (userSceneHistory !== null) {
+      setSceneIds(userSceneHistory.resources);      
+    } else {
       setError('Failed to fetch user history. Please try again later.');
       setSceneIds([]);
-    } finally {
-      setIsLoading(false);
-    }
+      return;
+    } 
+
   }, [token]);
 
   useEffect(() => {
-    fetchUserHistory();
-  }, [fetchUserHistory]);
+    handleUserSceneHistory();
+  }, [handleUserSceneHistory]);
 
   /**
-   * Fetches preview image for a single scene from the backend and sets it in state.
-   * Note: Uses custom header 'X-Scene-Name' to get the scene name to allow for binary and text data.
+   * Handles fetching of preview image and name for a single scene from the
+   * backend and sets it in state.
    */
-  const fetchPreview = useCallback(async (uuid: string) => {
-    if (previews[uuid] !== undefined) return;
+  const handlePreview = useCallback(async (sceneID: string) => {
+    // If preview is already fetched, return
+    if (previews[sceneID] !== undefined) return;
 
-    try {
-      console.log("Fetching from ", `${BACKEND_URL}/preview/${uuid}`);
-      const response = await fetch(`${BACKEND_URL}/preview/${uuid}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        const errorData = await response.json();
-        console.error(`Error fetching preview for ${uuid}:`, errorData);
-        setPreviews(prev => ({ ...prev, [uuid]: null }));
-        return;
-      }
-
-      const blob = await response.blob();
-      const sceneName = response.headers.get('X-Scene-Name') || 'Unnamed Scene';
+    // Fetch scene name
+    const sceneName = await fetchSceneName(sceneID, token ? token : '');
+    if (sceneName === null) {
+      setPreviews(prev => ({ ...prev, [sceneID]: null }));
+      return;
+    }
+    
+    // Fetch scene thumbnail .png
+    const thumbnail = await fetchSceneThumbnail(sceneID, token ? token : '');
+    if (thumbnail !== null) {
       setPreviews(prev => ({
         ...prev,
-        [uuid]: { image: URL.createObjectURL(blob), name: sceneName }
-      }));
-    } catch (error) {
-      console.error(`Error fetching preview for ${uuid}:`, error);
-      setPreviews(prev => ({ ...prev, [uuid]: null }));
+        [sceneID]: { image: URL.createObjectURL(thumbnail), name: sceneName.name }
+      })); 
+    } else {
+      setPreviews(prev => ({ ...prev, [sceneID]: null }));
     }
   }, [token, previews]);
 
@@ -112,10 +94,10 @@ const UserSceneHistory: React.FC = () => {
   
     currentPageIds.forEach(uuid => {
       if (previews[uuid] === undefined) {
-        fetchPreview(uuid);
+        handlePreview(uuid);
       }
     });
-  }, [sceneIds, currentPage, scenesPerPage, fetchPreview, previews]);
+  }, [sceneIds, currentPage, scenesPerPage, handlePreview, previews]);
 
   const handlePreviewClick = (uuid: string, name: string) => {
     navigate(`/Scene/?uuid=${uuid}&name=${name}`);
@@ -147,7 +129,25 @@ const UserSceneHistory: React.FC = () => {
   const currentScenes = sceneIds.slice((currentPage - 1) * scenesPerPage, currentPage * scenesPerPage);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+    <div className="d-flex flex-column min-vh-100">
+      <NavBar />
+      <Container fluid className="flex-grow-1 px-0 py-0">
+        <div className="bg-dark text-white py-3 px-3">
+          <Container className="d-flex justify-content-between align-items-center">
+            <h2 className="mb-0">User History</h2>
+            <Link to="/Home">
+              <Button variant="primary">Create New Scene</Button>
+            </Link>
+          </Container>
+        </div>
+        <Container className="py-4">
+          <Alert variant="info">Loading...</Alert>
+        </Container>
+      </Container>
+      <Footer />
+    </div>
+    )
   }
 
   return (
@@ -209,7 +209,7 @@ const UserSceneHistory: React.FC = () => {
               </Row>
             </>
           ) : (
-            <Alert variant="info">No scenes found in your history.</Alert>
+            <Alert variant="info">No completed scenes found in your history.</Alert>
           )}
         </Container>
       </Container>

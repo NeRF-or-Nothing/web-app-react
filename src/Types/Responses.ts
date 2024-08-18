@@ -1,6 +1,6 @@
 /**
  * @file Responses.ts
- * @desc This file contains type declarations for decoding JSON responses from the backend.
+ * @desc This file contains type declarations for decoding api responses from the backend.
  */
 
 /**
@@ -15,6 +15,9 @@ export interface MetadataResponse {
 
 /**
  * JSON structure of scene metadata response from the backend.
+ * Contains request metadata and information about the scene's resources.
+ * Particularly, the resources field contains information about the scene's output types,
+ * iterations, and the existence and size of the resources.
  */
 export interface SceneMetadataResponse {
   meta : MetadataResponse
@@ -32,15 +35,16 @@ export interface SceneMetadataResponse {
 
 /**
  * JSON structure of user history response from the backend.
- * Contains metadata and list of scene ids.
+ * Contains request metadata and list of scene ids.
  */
-export interface UserHistoryResponse {
+export interface UserSceneHistoryResponse {
   meta: MetadataResponse;
   resources: string[];
 }
 
 /**
  * JSON structure of scene name response from the backend.
+ * Contains request metadata and the name of the scene.
  */
 export interface SceneNameResponse {
   meta: MetadataResponse;
@@ -49,8 +53,8 @@ export interface SceneNameResponse {
 
 /**
  * JSON strucutre of scene queue position response from the backend.
+ * Contains request metadata, the stage of the scene, and the position in the stages queue.
  */
-
 export interface SceneQueuePositionResponse {
   meta: MetadataResponse;
   stage: string;

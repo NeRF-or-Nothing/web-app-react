@@ -1,75 +1,25 @@
 /**
  * @file CommonApiCalls.ts
- * @desc Commonly used fetch api calls to backend
+ * @desc Commonly used fetch api calls to backend.
+ * All functions return null on failure. All http errors handling should be 
+ * done in the fetch calls.
 */
 
-
 import { BACKEND_URL } from './Constants';
-import { MetadataResponse, SceneMetadataResponse } from '../Types/Responses';
+import { MetadataResponse, SceneMetadataResponse, SceneNameResponse, UserSceneHistoryResponse } from '../Types/Responses';
 
-
-/** 
- * @desc Fetches metadata for a (hopefully) completed scene/job on the backend.
- * @returns SceneMetadataResponse on success, null on failure
- */
-async function fetchSceneMetadata(
-  sceneID: string, 
-  token: string, 
-  outputType?: string
-): Promise<SceneMetadataResponse | null> {
-  try {
-    const url = `${BACKEND_URL}/data/scenemetadata/${sceneID}`;
-    
-    const formData = new FormData();
-    if (outputType) {
-      formData.append('output_type', outputType);
-    }
-
-    console.log("Fetching from", url);
-
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json() as SceneMetadataResponse;
-    return data;
-  } catch (error) {
-    console.error(`Error fetching job data for ${sceneID}:`, error);
-    return null;
-  }
-}
 /**
- * @desc Fetches the user's scene history from the backend.
- * @Requires a valid token containing user's ID
- * @returns Array of scene IDs on success, null on failure
+ * All the API calls that are used in the frontend
  */
-async function fetchUserHistory(token: string): Promise<string[] | null> {
-  try {
-    console.log("Fetching from ", `${BACKEND_URL}/history`);
-    const response = await fetch(`${BACKEND_URL}/history`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.resources || [];
-  } catch (error) {
-    console.error('Error fetching user history:', error);
-    return null;
-  }
-}
+export { 
+  fetchLogin,
+  fetchRegister,
+  fetchPostVideo,
+  fetchSceneMetadata,
+  fetchSceneName,
+  fetchSceneThumbnail,
+  fetchUserSceneHistory, 
+};
 
 /**
  * @desc Logs existing user into NeRF-Or-Nothing
@@ -177,10 +127,138 @@ async function fetchPostVideo(
   }
 }
 
-export { 
-  fetchSceneMetadata,
-  fetchUserHistory, 
-  fetchLogin,
-  fetchRegister,
-  fetchPostVideo,
-};
+
+/** 
+ * @desc Fetches metadata for a (hopefully) completed scene/job on the backend.
+ * @returns SceneMetadataResponse on success, null on failure
+ */
+async function fetchSceneMetadata(
+  sceneID: string, 
+  token: string, 
+  outputType?: string
+): Promise<SceneMetadataResponse | null> {
+
+  try {
+    const url = `${BACKEND_URL}/data/scene/metadata/${sceneID}`;
+    
+    const formData = new FormData();
+    if (outputType) {
+      formData.append('output_type', outputType);
+    }
+
+    console.log("Fetching from", url);
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json() as SceneMetadataResponse;
+    return data;
+  } catch (error) {
+    console.error(`Error fetching job data for ${sceneID}:`, error);
+    return null;
+  }
+}
+
+/**
+ * @desc Fetches the scene name corresponding to SceneID from the backend
+ * @returns String containing scene name on success, null on failure
+ */
+async function fetchSceneName(
+  sceneID: string,
+  token: string
+): Promise<SceneNameResponse | null> {
+
+  try {
+    console.log("Fetching from ", `${BACKEND_URL}/data/scene/name/${sceneID}`);
+    const response = await fetch(`${BACKEND_URL}/data/scene/name/${sceneID}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json() as SceneNameResponse;
+    return data
+  } catch (error) {
+    console.error('Error fetching scene name:', error);
+    return null;
+  }
+}
+
+/**
+ * @desc Fetches the thumbnail for a specific scene
+ * @returns A Blob containing the thumbnail image data on success, null on failure
+ */
+async function fetchSceneThumbnail(
+  sceneID: string,
+  token: string
+): Promise<Blob | null> {
+  try {
+    const url = `${BACKEND_URL}/data/scene/thumbnail/${sceneID}`;
+
+    console.log("Fetching thumbnail from", url);
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // The backend is sending raw image data, so we return it as a Blob
+    const data = await response.blob();
+    return data;
+  } catch (error) {
+    console.error(`Error fetching thumbnail for scene ${sceneID}:`, error);
+    return null;
+  }
+}
+
+/**
+ * @desc Fetches the user's scene history from the backend.
+ * @Requires a valid token containing user's ID
+ * @returns Array of scene IDs on success, null on failure
+ */
+async function fetchUserSceneHistory(
+  token: string
+): Promise<UserSceneHistoryResponse | null> {
+
+  try {
+    console.log("Fetching from ", `${BACKEND_URL}/history`);
+    const response = await fetch(`${BACKEND_URL}/history`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json() as UserSceneHistoryResponse;
+    return data;
+  } catch (error) {
+    console.error('Error fetching user history:', error);
+    return null;
+  }
+}
+
+
+

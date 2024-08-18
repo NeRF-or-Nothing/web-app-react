@@ -51,7 +51,7 @@ function NavBar(): JSX.Element {
                 <Navbar.Text className="me-3">
                   Logged in as: {username}
                 </Navbar.Text>
-                <Nav.Link as={Link} to="/History" className="px-2">
+                <Nav.Link as={Link} to="/MyScenes" className="px-2">
                   <Button variant="outline-light" className="w-100">My Scenes</Button>
                 </Nav.Link>
                 <Nav.Link className="px-2">

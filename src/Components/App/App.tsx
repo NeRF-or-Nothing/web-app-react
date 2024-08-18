@@ -11,7 +11,7 @@ import About from '../About/About';
 import Loading from '../Loading/Loading';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
-import History from '../User/UserSceneHistory';
+import UserSceneHistory from '../User/UserSceneHistory';
 import Scene from '../Scene/Scene';
 import UploadASplatScene from '../Scene/UploadASplatScene/UploadASplatScene';
 import FullRendered from '../FullRendered/FullRendered';
@@ -29,7 +29,7 @@ function App() {
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/About" element={<About />} />
-          <Route path="/History" element={<History/>} />
+          <Route path="/MyScenes" element={<UserSceneHistory/>} />
           <Route path="/Scene" element={<Scene />} />
           <Route path="/Scene/UploadASplatScene" element={<UploadASplatScene />} />
           {/* <Route path="/Community" element={<Community />} /> */}
